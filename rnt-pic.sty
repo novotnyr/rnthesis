@@ -1,0 +1,33 @@
+\ProvidesFile{rnt-pic.sty}
+                [2004/12/15 v0.1a]
+
+%--- define new \ifpdf for pdfTeX
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+  \pdffalse % nie sme v pdfLaTeXu
+\else
+  \pdfoutput=1 % sme v PDFLaTeX
+  \pdftrue
+\fi
+
+\ifpdf
+  \RequirePackage[pdftex]{graphicx}
+  \DeclareGraphicsRule{*}{eps}{*}{}
+\else
+  \RequirePackage[xdvi]{graphicx}
+\fi
+
+%---------------
+\def\obrazok#1#2{%
+\begin{figure}[!htb]
+\ifpdf
+  \centerline{\includegraphics{#1.pdf}}
+\else
+  \centerline{\includegraphics{#1.eps}}
+\fi
+\par
+\centerline{\parbox{13cm}{\sl \caption{#2}}}
+\end{figure}
+} 
+%
+\endinput                

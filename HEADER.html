@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <title>Trieda diplomovej prácej pre LaTeX</title>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8">
+  <style type="text/css">
+  pre {
+    background: #EDEDED
+  }
+  </style>
+</head>
+
+<body>
+  <h1><tt>rnthesis.cls</tt> - trieda diplomovej práce pre
+  LaTeX</h1>
+
+  <center>
+    [ <a href="#faq">FAQ</a> ]
+    [ <a href="rnthesis.cls">rnthesis.cls</a> ] | [ <a href=
+    "/~novotnyr/wiki/pmwiki.php/TeX/TriedaPreDiplomovePrace">Wiki</a>
+    ] | [ <a href="mailto:sk.szm@r.novotny">Jokes, comments,
+    feedback, nadávky</a> ] |
+  </center>
+
+  <p><tt>rnthesis.cls</tt> je moj pokus o
+  vytvorenie LaTeXovej triedy na pisanie diplomky. Vznikol ako
+  vedlajsi produkt pri spracovavani jednej diplomovej prace (nie
+  mojej :-)). Inspiroval som sa minulorocnym (2003) preddiplomovym
+  stretnutim studentov <a href="http://www.fei.tuke.sk">FEI
+  TUKE</a>, ktorym bola prezentovana ,,standardna" <a href=
+  "http://www.tuke.sk/sevcovic/FEIDipLaTeX.html">katedrova
+  sablona</a>, ktora mala jednak zjednotit vzhlad prac a jednak
+  predist mnohym otazkam aspirujucim na FAQ (ake su okraje? aky
+  font? ake riadkovanie? preco je <a href=
+  "http://www.collectionscanada.ca/iso/tc46sc9/standard/690-2e.htm">
+  ISO norma na citacie</a> taka <a href=
+  "http://www.iso.org/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBER=4888&amp;ICS1=1&amp;ICS2=140&amp;ICS3=20">
+  draha</a> a pod.) Mojim cielom je vytvorit standardnu sablonu s
+  co najjednoduchsim pouzitim, ktora vygeneruje co najviac
+  standardnych elementov diplomovej prace pouzitim co najmensieho
+  kodu. (este dve stranky a uz mam zapocet na SW projekt :-)).
+
+
+  <h2>FAQ prvý (vhodné prečítať pred otravovaním autora ;-)) </h2>
+  <ul>
+    <li>MikTeX bez inštalácie češtiny bliaka o neznámom DJovi
+ (kompilujem cslatexom)
+      <ul>
+        <li>kompilovať načim pomocou <tt>cslatex --tcx=cp1250cs -src-specials nazovsuboru.tex</tt>. Je užitočné pred kompiláciou odmazať súbory AUX z predošlých kompilácií </li>
+      </ul>
+    </li>
+  <li> Nevidím obrázky!
+    <ul>
+      <li>odmažte voľbu <em>draft</em> z deklarácie <tt>\usepackage</tt> </li>
+    </ul>
+  </li>
+  <li>Diakritika chýba!
+    <ul>
+      <li>tradičná otázka (more to come soon)</li>
+    </ul>
+  </li>
+  <li>Vyšiel som z príkladov a použitá literatúra sa nevysádza, či sa vysádza divne!
+    <ul>
+      <li>V príklade sa mlčky predpokladá používanie BibTeXu.
+      Správna postupnosť príkazov je potom vykompilovať súbor (najlepšie dvakrát),
+      spustiť <tt>bibtex NazovLaTeXovehoSuboruBezPripony</tt> a opať vykompilovať.
+      Alternatívne je možné použiť štandardné prostredie <tt>thebibliography</tt>.</li>
+    </ul>
+  </li>
+
+  <li>Help, help, I'm being repressed!
+    <ul>
+      <li>Bloody peasant? </li>
+    </ul>
+  </li>
+  </ul>
+  <h2>Minimálne požiadavky</h2>
+  <ul class="noindent">
+    <li>Intel Pentium 4, 3.2 GHz, 256MB RAM, 1GB drive space,
+    grafika ATI Radeon 9200, DVD mechanika, OS Windows XP SP2 alebo
+    novší, DirectX 9.0c</li>
+
+    <li>fungujúca inštalácia LaTeXu (distro MikTeX, TeXLive, teTeX,
+    SemTeX, BattleTeX...)</li>
+
+    <li>BibTeX (na udržiavanie zoznamu použitej literatúry)</li>
+
+    <li>voliteľné triedy/balíčky:
+  <ul>
+    <li><tt>theorem.sty</tt> -- kvôli vlastným úpravám rezov písma
+    v prostrediach pre vety/definície a pod v štýlovom súbore
+    <tt>rnt-thm.sty</tt></li>
+
+    <li><a href="http://www.ctan.org/tex-archive/help/Catalogue/entries/graphicx.html"><tt>graphicx</tt></a> -- používaný na vkladanie obrázkov v
+    štýlovom súbore <tt>rnt-pic.sty</tt></li>
+
+    <li><tt>natbib</tt> -- používaný na formátovanie citácií</li>
+    </ul>
+    </li>
+  </ul>
+
+  <h2>Komponenty</h2>
+
+  <ul>
+    <li><tt>rnthesis.cls</tt> - ,,the" súbor triedy. Tento súbor je
+    povinný.</li>
+
+    <li><tt>rnt-thm.sty</tt> - štýlový súbor pre zavedenie podpory
+    prostredí pre vety, dôkazy a pod.</li>
+
+    <li><tt>rnt-pic.sty</tt> - štýlový súbor pre zavedenie podpory
+    obrázkov v EPS/PDF</li>
+  </ul>
+
+  <h2>Inštalácia</h2>Inštalácia: <tt>rnthesis.cls</tt> skopírujte
+  do adresára s TeXovým súborom vašej diplomky. Voliteľne
+  nakopírujte na to isté miesto voliteľné komponenty
+  (<tt>rnt-thm.sty</tt>, <tt>rnt-pic.sty</tt>)
+
+  <p>Alternatívne možno nakopírovať požadované súbory do hlbín
+  adresára <tt>tex-mf</tt> (napr.
+  <tt>tex-mf/tex/latex/rnthesis</tt>) a refreshnúť databázu
+  súborov.</p>
+
+  <h2>Použitie</h2>Šablóna sa používa ako každá iná trieda v
+  LaTeXu. Toto je minimálny použiteľný súbor.
+  <pre>
+  \documentclass{rnthesis}
+  \usepackage{slovak}
+  \begin{document}
+  \podakovanie{%
+    Rád by som poďakoval vedúcemu diplomovej
+    práce akad. Františkovi Tarabovi, DrSc.
+    za cenné pripomienky a za obetavosť počas
+    tvorby diplomovej práce.
+  }
+  \title{O diplomových prácach}
+  \maketitle
+  \newpage
+  \chapter{Tradičný Lipsum}
+  Lorem ipsum dolor sit amet.
+  \end{document}
+</pre>Dolezity je prvy riadok. Standardne asi kazdy uzivatel
+pouziva <tt>\documentclass{article}</tt> (article je trieda), tu
+vsak pouzivame <tt>rnthesis.cls</tt> a teda
+<tt>\documentclass{rnthesis}</tt>. Po skompilovani ale zistime, ze
+dokument je ,,nevalne chute". Na dochutenie sluzi jednak zaplava
+moznosti balickov a jednak mnozstvo prikazov.
+
+  <h3>Možnosti triedy</h3>Možnosti tried sa uvádzajú do hranatých
+  zátvoriek za <tt>\documentclass</tt> a pred <tt>{rnthesis}</tt>.
+  Pluskom sú označené implicitné možnosti.
+
+  <table>
+    <tr>
+      <td>a4paper<sup>+</sup></td>
+
+      <td>Nastaví štandardný papier pre LaTeX. Vcelku potrebné,
+      keďže sa nepredpokladá, že niekto bude písať diplomku na A0.
+      (V študovni Angely Merici sa nachádza jedna na A5ke :-)</td>
+    </tr>
+
+    <tr>
+      <td>thesismargins</td>
+
+      <td>Nastaví štandardné okraje (momentálne sa nepamätám na
+      presné rozmery, pozri PDF)</td>
+    </tr>
+
+    <tr>
+      <td>thesislinespacing</td>
+
+      <td>Nastaví ,,primerané" riadkovanie. Ekvivalentné
+      <tt>\renewcommand{\baselinestretch}{1.4}</tt></td>
+    </tr>
+
+    <tr>
+      <td>thesislinespacing</td>
+
+      <td>Nastaví vzhľad nadpisov tak, ako boli navrhnuté pre
+      spomínanú diplomku</td>
+    </tr>
+  </table>...more to come
+
+  <h3>Príkazy diplomovkových metadát</h3>Tieto príkazy udávajú
+  rôzne dáta o diplomke (názov, vedúci, atď). Používajú sa v štýle
+  <tt>\príkaz{parameter}</tt>. Typické použitie <tt>\title{Dolor
+  sit amet}</tt>. Čím viac údajov vyplníte, tým lepšie.
+
+  <table>
+    <tr>
+      <td>\title</td>
+
+      <td>Každá diplomovka má názov. Ten sa špecifikuje práve
+      tu.</td>
+    </tr>
+
+    <tr>
+      <td>\author</td>
+
+      <td>Autor plodov ducha v tejto práci</td>
+    </tr>
+
+    <tr>
+      <td>\miesto</td>
+
+      <td>Miesto vydania. Implicitne ,,Košice"</td>
+    </tr>
+
+    <tr>
+      <td>\rok</td>
+
+      <td>Rok publikovania diplomovej práce</td>
+    </tr>
+
+    <tr>
+      <td>\typprace</td>
+
+      <td>Typ práce. Ako argument príde typ práce, najčastejšie
+      ,,diplomová" či ,,bakalárska". Implicitne ,,diplomová"</td>
+    </tr>
+
+    <tr>
+      <td>\ustav</td>
+
+      <td>Ústav, na ktorom bola práca pripravená. Default: ,,Ústav
+      informatiky"</td>
+    </tr>
+
+    <tr>
+      <td>\odbor</td>
+
+      <td>Odbor, ktorý sa plánuje ukončiť odovzdaním diplomovej
+      práce. Default: ,,Informatika"</td>
+    </tr>
+
+    <tr>
+      <td>\podakovanie</td>
+
+      <td>Poďakovanie, či už vedúcemu, alebo nejakej inej
+      osobe/zvieraťu/objektu</td>
+    </tr>
+
+    <tr>
+      <td>\vyhlasenie</td>
+
+      <td>Vyhlásenie o dodržiavaní podmienok pri písaní diplomovej
+      práce. Pri neuvedení je použitý štandardný ďakovný text.</td>
+    </tr>
+
+    <tr>
+      <td>\abstrakt</td>
+
+      <td>Stručný abstrakt práce v slovenskom jazyku.</td>
+    </tr>
+
+    <tr>
+      <td>\abstract</td>
+
+      <td>Stručný abstrakt práce v anglickom jazyku.</td>
+    </tr>
+
+    <tr>
+      <td>\ciel</td>
+
+      <td>Cieľ diplomovej práce. Používa sa na liste Zadanie
+      diplomovej práce</td>
+    </tr>
+
+    <tr>
+      <td>\literatura</td>
+
+      <td>Použitá literatúra. Tiež v Zadaní (Forward compatibility
+      warning: možno z toho bude prostredie)</td>
+    </tr>
+
+    <tr>
+      <td>\veduci</td>
+
+      <td>V Zadaní. Vedúci DP</td>
+    </tr>
+
+    <tr>
+      <td>\konzultant</td>
+
+      <td>V Zadaní. Konzultant DP</td>
+    </tr>
+
+    <tr>
+      <td>\oponent</td>
+
+      <td>V Zadaní. Oponent DP</td>
+    </tr>
+
+    <tr>
+      <td>\datumzadania</td>
+
+      <td>V Zadaní. Zjavné z názvu príkazu</td>
+    </tr>
+
+    <tr>
+      <td>\datumodovzdania</td>
+
+      <td>V Zadaní. Zjavné z názvu príkazu</td>
+    </tr>
+
+    <tr>
+      <td>\datumpotvrdenia</td>
+
+      <td>V Zadaní. Zjavné z názvu príkazu</td>
+    </tr>
+
+    <tr>
+      <td>\riaditelustavu</td>
+
+      <td>V Zadaní. Meno riaditeľa ústavu.</td>
+    </tr>
+  </table>
+
+  <h3>Ďalšie príkazy definované v šablóne</h3>
+
+  <h4>Prostredia (<tt>rnt-thm.sty</tt>)</h4>Tieto prostredia sú
+  definované pomocou štýlového súboru <i>theorem.sty</i>.
+
+  <table>
+    <tr>
+      <td>veta</td>
+
+      <td>Veta X.Y. Slanted font.</td>
+    </tr>
+
+    <tr>
+      <td>lema</td>
+
+      <td>Lema X.Y.</td>
+    </tr>
+
+    <tr>
+      <td>dosl</td>
+
+      <td>Dôsledok X.Y.</td>
+    </tr>
+
+    <tr>
+      <td>df</td>
+
+      <td>Definícia X.Y</td>
+    </tr>
+
+    <tr>
+      <td>pozn</td>
+
+      <td>Poznámka X.Y</td>
+    </tr>
+
+    <tr>
+      <td>pr</td>
+
+      <td>Príklad X.Y</td>
+    </tr>
+
+    <tr>
+      <td>dokaz</td>
+
+      <td>Dôkaz, ukončený štvorčekom \qed</td>
+    </tr>
+  </table>Príklad použitia:
+  <pre>
+\begin{veta}[Metaveta]
+V texte každej slušnej diplomovej práce existuje aspoň jedna veta.
+\end{veta}
+</pre>
+
+  <h4>Príkazy</h4>
+
+  <table width="100%">
+    <tr>
+      <td width="60">\qed</td>
+
+      <td width="100"><tt>rnt-thm.sty</tt></td>
+
+      <td width="692">štvorček na konci dôkazu. Podobné $\Box$</td>
+
+      <td width="229"><tt>\qed</tt></td>
+    </tr>
+
+    <tr>
+      <td>\osoba</td>
+
+      <td> </td>
+
+      <td>Markup pre osobu. Štandardne vysádzané kapitálkami.</td>
+
+      <td><tt>\osoba{Donald Ervin Knuth}</tt></td>
+    </tr>
+
+    <tr>
+      <td>\pojem</td>
+
+      <td> </td>
+
+      <td>Markup pre pojem v definícii. Štandardne vysádzané
+      kurzívou.</td>
+
+      <td><tt>Tento \pojem{termín} je dôležitý</tt></td>
+    </tr>
+
+    <tr>
+      <td>\tg</td>
+
+      <td> </td>
+
+      <td>Funkcia <i>tangens</i>. Ďalšie vlastné funkcie,
+      (napr. <i>rng</i>, či <i>dom</i>)
+      ktoré nie sú štandardne definované, možno
+      dodefinovať podľa príkladu: <tt>\def\dom{\mathop{\rm dom}}
+      </td>
+
+      <td><tt>Teraz určíme hodnotu $\tg(x)$ v bode 0.</tt></td>
+    </tr>
+    <tr>
+      <td>\cotg</td>
+
+      <td> </td>
+
+      <td>Funkcia <i>kotangens</i></td>
+
+      <td><tt>Teraz určíme hodnotu $\cotg(x)$ v bode 0.</tt></td>
+    </tr>
+    <tr>
+      <td>\obrazok</td>
+
+      <td><tt>rnt-pic.sty</tt></td>
+
+      <td>Vloženie obrázku typu EPS/PDF. Na korektné vloženie musí
+      byť prítomný súbor obrázku typu EPS (v prípade kompilácie
+      LaTeXom) a súbor typu PDF (v prípade kompilácie pdfLaTeXom).
+      Prípona sa neuvádza, je pripojená automaticky, podľa toho,
+      čím sa súbor kompiluje.</td>
+
+      <td><tt>\obrazok{obr1}{Graf Dirichletovej funkcie}</tt></td>
+    </tr>
+  </table>
+
+  <h2>Known issues</h2>
+
+  <ul>
+    <li>dopracovať formátovanie citácií</li>
+
+    <li>vykonať pohon na <tt>underfull hbox</tt></li>
+
+    <li>ošetriť stav, keď nie je abstrakt definovaný</li>
+
+    <li>and many more</li>
+  </ul>
+
+  <h2>Zmeny</h2>
+  <h3>0.65 (19. jan. 2005)</h3>
+
+  <ul class="noindent">
+    <li>Úpravy pre prípad dlhého názvu, resp. dlhého cieľa:
+    Opravené medziriadkové medzery v
+    názve práce a na strane zadania. (Možno by to chcelo
+    zmenšiť riadkovanie v cieli...)</li>
+  </ul>
+
+  <h3>0.6a (15. nov. 2004)</h3>
+
+  <ul class="noindent">
+    <li>diakritika konvertovaná na TeXovské sekvencie, aby aj
+    úbohí linuxáci a iní užívatelia využívať šablónu mohli.</li>
+  </ul>
+
+  <h3>0.6 (18. okt. 2004)</h3>
+
+  <ul class="noindent">
+    <li>trieda je rozdelená na tri komponenty. Dôvodom je odbúranie
+    závislostí na ďalších balíčkoch v prípade, že užívateľ nechce
+    používať obrázky, resp. definované prostredia</li>
+  </ul>
+
+  <h3>0.5 (18. okt. 2004)</h3>
+
+  <ul class="noindent">
+    <li>zadefinované okraje a úvodná strana podľa <i>D. Katuščák:
+    Ako písať záverečné a kvalifikačné práce)</i></li>
+
+    <li>pridanie príkazu <tt>\obrazok</tt> na vkladanie EPS
+    obrázkov (powered by <tt>graphicx</tt>)</li>
+  </ul>
+
+  <h3>0.4 (30. sept. 2004)</h3>
+
+  <ul class="noindent">
+    <li>implementovaný abstrakt</li>
+
+    <li>definované často využívané prostredia pre vetu, definíciu a
+    iné časté príkazy (pozri vyššie)</li>
+  </ul>
+
+  <h3>stále 0.3a (29. sept. 2004)</h3>
+
+  <ul class="noindent">
+    <li>vypustený lepší príklad súboru</li>
+  </ul>
+
+  <h3>0.3a (28. sept. 2004)</h3>
+
+  <ul class="noindent">
+    <li>opravená chyba s poďakovaním (záležitosť jedného písmena:
+    <tt>\ifx</tt> vs. <tt>\if</tt> ;-))</li>
+  </ul>
+
+  <h3>0.3 (25. sept. 2004)</h3>
+
+  <ul class="noindent">
+    <li>prvý verejný release</li>
+  </ul>
+
+  <h2>Download</h2>Download je na spodku. Varovanie! Toto je
+  predbežná verzia. Špecifikácia príkazov sa môže zmeniť! Použitie
+  na vlastné riziko!
+</body>
+</html>

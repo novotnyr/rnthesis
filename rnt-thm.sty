@@ -1,0 +1,22 @@
+\ProvidesFile{rnt-thm.sty}
+                [2004/12/15 v0.1a]
+\RequirePackage{theorem}
+\theorembodyfont{\sl}
+\newtheorem{veta}{Veta}[section] %resetni counter s kazdou sekciou
+\newtheorem{lema}{Lemma}[section]   %cisluj nezavisle od vety, resetni s kazdou sekciou
+\newtheorem{dosl}[lema]{D\^osledok} % dosledok
+\theorembodyfont{\normalfont}
+\newtheorem{df}{Defin\'{\i}cia}[section] %definicie cislujeme zvlast, podla sekcii
+\newtheorem{pozn}[lema]{Pozn\'amka} %poznamky cisluj ako lemy
+\newtheorem{pr}[lema]{Pr\'{\i}klad}
+%
+\newcommand{\osoba}[1]{\textsc{#1}}
+\newcommand{\pojem}[1]{{\itshape #1}}
+%
+\def\qed{\vbox{\hrule \hbox{\vrule \phantom{N}\vrule}\hrule}}
+%
+\newenvironment{dokaz}
+  {\par\medskip\noindent\textit{D\^okaz.}\par\nobreak\noindent\ignorespaces}
+  {\par\nobreak\hfill\qed\par\medskip} 
+%%
+\endinput                
