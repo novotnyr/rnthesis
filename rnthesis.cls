@@ -1,7 +1,7 @@
 % Trieda pre diplomove prace. mailto:sk.szm@r.novotny
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2005/01/19 v0.65
+              [2009/04/07 v0.9
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -66,6 +66,10 @@
 \newif\if@thesischapterstyle
 \@thesischapterstylefalse
 \DeclareOption{thesischapterstyle}{\@thesischapterstyletrue}
+%
+\newif\if@usesections
+\@usesectionsfalse
+\DeclareOption{usesections}{\@usesectionstrue}
 %
 \ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany}
 \ProcessOptions
@@ -221,7 +225,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \begin{center}
   {\sffamily \Large
   Univerzita Pavla Jozefa \v{S}af\'arika v Ko\v{s}iciach\par
-  Pr\'{\i}rodovedeck\'a fakulta
+  Pr\'{\i}rodovedeck\'a fakulta\par\vskip6pt
+  \@ustav
   }
   \par
   %\vspace*{8cm}
@@ -231,68 +236,14 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   	{\huge \sffamily \bfseries \expandafter\uppercase\expandafter{\@title}}\par\bigskip
   }  
   {\large \sffamily \bfseries \expandafter\uppercase\expandafter{\@typprace} PR\'ACA}\par
-  \vspace*{1.4cm}
-  {\Large \sffamily \bfseries \expandafter\uppercase\expandafter{\@author}}
+  \vspace*{1.4cm}  
   \par 
   \vfill
-  {\sffamily \bfseries \@rok{}}
+  {\sffamily \bfseries \@miesto\ \@rok \hfill \@author}
   \vspace*{1cm}
   \end{center}
 \end{titlepage} 
 \newpage
-\begin{titlepage}
-  \newpage
-  \thispagestyle{empty}
-  \null
-  %\vspace*{-20mm}
-
-  \begin{center}
-  {\large \sffamily
-  Pr\'{\i}rodovedeck\'a fakulta Univerzity Pavla Jozefa \v{S}af\'arika v~Ko\v{s}iciach\\
-  \@ustav
-  }
-  \par
-  \vspace*{1cm}
-  
-  {\Large \sffamily \bfseries Zadanie diplomovej pr\'ace}
-  \end{center}
-
-  \vspace*{0.7cm}
-  
-  \begin{tabbing}
-  MMMMMMMMMMMMMMMMMM \= \kill
-  \textbf{Meno a~priezvisko diplomanta:} \> \@author\\
-  \textbf{Odbor:} \> \@odbor
-  \end{tabbing}
-
-  %\vspace*{.5cm}
-  
-  \noindent\textbf{N\'azov:} \@title \\[.2cm]    
-  %
-  \noindent\textbf{Cie\v{l}:} 
-  \@ciel\\[.2cm]
-  %
-  \noindent\textbf{Odpor\'u\v{c}an\'a literat\'ura:}\par
-  \@literatura
-  \par
-  \bigskip  
-  \begin{tabbing}
-  \textbf{D\a'atum odovzdania diplomovej pr\a'ace: } \= \kill
-  \textbf{Ved\a'uci diplomovej pr\a'ace:} \> \@veduci\\
-  \textbf{Konzultant diplomovej pr\a'ace:} \> \@konzultant\\
-  \textbf{Oponent diplomovej pr\a'ace:} \> \@oponent \\
-  \textbf{D\a'atum zadania diplomovej pr\a'ace:} \> \@datumzadania \\
-  \textbf{D\a'atum odovzdania diplomovej pr\a'ace:} \> \@datumodovzdania \\
-  \textbf{D\a'atum potvrdenia:} \> \@datumpotvrdenia
-  \end{tabbing}
-  \vfill
-  \vspace*{1cm}  
-  \hfill
-  \begin{tabular}{c}
-  \@riaditelustavu \\
-  riadite\v{l} \'ustavu
-  \end{tabular}  
-\end{titlepage}  
 % a dalsia strana ide pre vyhlasenie
 \newpage\thispagestyle{empty}
 \par
@@ -374,9 +325,13 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcounter {subparagraph}[paragraph]
 \renewcommand \thepart {\@Roman\c@part}
 \renewcommand \thechapter {\@arabic\c@chapter}
-\renewcommand \thesection {\thechapter.\@arabic\c@section}
+\if@usesections
+  \renewcommand \thesection {\@arabic\c@section}
+\else
+  \renewcommand \thesection {\thechapter.\@arabic\c@section}
+\fi
 \renewcommand\thesubsection   {\thesection.\@arabic\c@subsection}
-\renewcommand\thesubsubsection{\thesubsection .\@arabic\c@subsubsection}
+\renewcommand\thesubsubsection{\thesubsection.\@arabic\c@subsubsection}
 \renewcommand\theparagraph    {\thesubsubsection.\@arabic\c@paragraph}
 \renewcommand\thesubparagraph {\theparagraph.\@arabic\c@subparagraph}
 \newcommand\@chapapp{\chaptername}
@@ -644,9 +599,13 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
     {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@equation}
   \@addtoreset{equation}{chapter}
 \fi  
-\newcounter{figure}[chapter]
+\newcounter{figure}
+\if@usesections
+  \renewcommand\thefigure{\@arabic\c@figure}
+\else
 \renewcommand \thefigure
      {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@figure}
+\fi
 \def\fps@figure{tbp}
 \def\ftype@figure{1}
 \def\ext@figure{lof}
@@ -658,8 +617,13 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
                {\@dblfloat{figure}}
                {\end@dblfloat}
 \newcounter{table}[chapter]
+\if@usesections
+  \renewcommand\thetable{\@arabic\c@table}
+\else
 \renewcommand \thetable
      {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@table}
+\fi
+
 \def\fps@table{tbp}
 \def\ftype@table{2}
 \def\ext@table{lot}
@@ -697,14 +661,25 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
 \setcounter{tocdepth}{2}
-\newcommand\tableofcontents{%
-    \@restonecolfalse
-    \chapter*{\contentsname
-        \@mkboth{%
-           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
-    \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
-    }
+\if@usesections
+    \newcommand\tableofcontents{%
+        \@restonecolfalse
+        \section*{\contentsname
+            \@mkboth{%
+               \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+        \@starttoc{toc}%
+        \if@restonecol\twocolumn\fi
+        }
+ \else
+    \newcommand\tableofcontents{%
+         \@restonecolfalse
+         \chapter*{\contentsname
+             \@mkboth{%
+                \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+         \@starttoc{toc}%
+         \if@restonecol\twocolumn\fi
+         }
+\fi
 \newcommand*\l@part[2]{%
   \ifnum \c@tocdepth >-2\relax
     \addpenalty{-\@highpenalty}%
@@ -761,11 +736,11 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
     \if@restonecol\twocolumn\fi
     }
 %%%
-%prikaz pre vygenerovanie znacky (tu: cislo v tvare [1], cisla
+%prikaz pre vygenerovanie znacky v thebibliography (tu: cislo v tvare [1], cisla
 %sa beru z countera enumiv)
 \renewcommand*{\@biblabel}[1]{[#1]} 
-%prikaz pre vygenerovanie odkazu na citaciu (tu: cislo v tvare F\"are, 1998)
-\renewcommand*{\@cite}[1]{#1} 
+%prikaz pre vygenerovanie odkazu na citaciu (tu: cislo/text v tvare [F\"are, 1998])
+\renewcommand*{\@cite}[1]{[#1]} 
 %toto sa vykona, ak je v \bibitem zadany volitelny argument (v podstate
 %"nevypisuj obsah volitelneho argumentu, namiesto neho ponechaj standardne
 %cislovanie"

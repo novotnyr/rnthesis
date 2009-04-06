@@ -1,14 +1,6 @@
 \ProvidesFile{rnt-pic.sty}
-                [2004/12/15 v0.1a]
-
-%--- define new \ifpdf for pdfTeX
-\newif\ifpdf
-\ifx\pdfoutput\undefined
-  \pdffalse % nie sme v pdfLaTeXu
-\else
-  \pdfoutput=1 % sme v PDFLaTeX
-  \pdftrue
-\fi
+                [2007/08/22 v0.2]
+\RequirePackage{ifpdf}
 
 \ifpdf
   \RequirePackage[pdftex]{graphicx}

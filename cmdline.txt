@@ -1,1 +1,0 @@
-"c:\Program Files\TextPad 4\TextPad.exe" %f(%l)

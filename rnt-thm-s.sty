@@ -1,9 +1,9 @@
-%Use, if top level container is chapter. Otherwise use rnt-thm-s.sty
-\ProvidesFile{rnt-thm.sty}
+%Use, if top level container is section. Otherwise use rnt-thm.sty
+\ProvidesFile{rnt-thm-s.sty}
                 [2004/04/19 v0.2]
 \RequirePackage{theorem}
 \theorembodyfont{\sl}
-\newtheorem{veta}{Veta}[chapter] %resetni counter s kazdou kapitolou
+\newtheorem{veta}{Veta}[section] %resetni counter s kazdou sekciou
 \newtheorem{lema}[veta]{Lemma}   
 \newtheorem{dosl}[veta]{D\^osledok} % dosledok
 \theorembodyfont{\normalfont}
