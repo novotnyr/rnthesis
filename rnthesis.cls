@@ -1,7 +1,7 @@
 % Trieda pre diplomove prace. mailto:sk.szm@r.novotny
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2009/04/07 v0.9
+              [2010/04/22 v0.96
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -71,6 +71,10 @@
 \@usesectionsfalse
 \DeclareOption{usesections}{\@usesectionstrue}
 %
+\newif\if@showhonesty
+\@showhonestyfalse
+\DeclareOption{showhonesty}{\@showhonestytrue}
+%
 \ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany}
 \ProcessOptions
 \input{size1\@ptsize.clo}
@@ -92,14 +96,19 @@
 \renewcommand\dbltopfraction{.7}
 \renewcommand\dblfloatpagefraction{.5}
 \if@thesismargins
+  %Odporucane okraje: zlava 3,5 cm, sprava 2 cm,
+  %zhora a zdola 2,5 cm
   \setlength{\hoffset}{-1in}
-  \setlength{\evensidemargin}{3.17cm} %.1mm pre \marginparsep
-  \setlength{\oddsidemargin}{3.17cm} %.1mm pre \marginparsep
-  \setlength{\textwidth}{14.5cm}%21cm - 3.17cm (evenmarg) - 3.17cm (oddmarg) - bulh. konst
+  \setlength{\evensidemargin}{3.6cm} %.1mm pre \marginparsep
+  \setlength{\oddsidemargin}{3.6cm} % to iste ako \oddsidemargin
+  \setlength{\textwidth}{15.3cm}%21cm - 2 (vonkajsi okraj) -  3.6 (vnutornz okraj) - bulh. konst
 %  
-  \setlength{\voffset}{-1in}  
-  \setlength{\topmargin}{1.9cm}
-  \setlength{\textheight}{22.9cm}
+  \setlength{\voffset}{-1in} % resetnime vrch stranky na 0pt
+  \setlength{\topmargin}{2.5cm} 
+  \setlength{\headheight}{0cm} % zahlavia nepouzivame
+  \setlength{\headsep}{0cm} % zahlavia nepouzivame  
+  \setlength{\footskip}{1.5cm}
+  \setlength{\textheight}{24.69cm} % 29.69cm - 2.5cm (topmargin) - 1.5cm (footskip) - 1cm (footskip + toto = 2.5cm)
 \fi
 \if@thesislinespacing
   \def\baselinestretch{1.4}
@@ -135,18 +144,19 @@
         \fi
         ##1}}}}
 \fi
-
 %rok
 \def\@rok{[20??]}
 \newcommand{\rok}[1]{\def\@rok{#1}}
 
-%ustav
-\def\@ustav{\'Ustav informatiky}
-\newcommand{\ustav}[1]{\def\@ustav{#1}}
-
 %odbor
 \def\@odbor{Informatika}
 \newcommand{\odbor}[1]{\def\@odbor{#1}}
+
+% Conditional macros: see http://www.physics.wm.edu/~norman/latexhints/conditional_macros.html
+%studijny program
+\let\@studprog=\relax
+\newcommand{\studprog}[1]{\def\@studprog{#1}}
+
 
 %podakovanie
 % \def\@podakovanie{\@latex@error{Neboli zadane udaje pre \noexpand\podakovanie}\@ehc} 
@@ -182,7 +192,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand{\veduci}[1]{\def\@veduci{#1}}
 
 %konzultant
-\def\@konzultant{\null}
+\let\@konzultant\relax
 \newcommand{\konzultant}[1]{\def\@konzultant{#1}}
 
 %oponent
@@ -205,6 +215,10 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \def\@riaditelustavu{doc. RNDr. Gabriela Andrejkov\'a, CSc.}
 \newcommand{\riaditelustavu}[1]{\def\@riaditelustavu{#1}}
 
+%pracovisko / katedra
+\def\@pracovisko{\errmessage{Pracovisko nebolo definovane. }}
+\newcommand{\pracovisko}[1]{\def\@pracovisko{#1}}
+
 % abstrakty: definujeme anglicky AbstraCt a slovensky AbstraKt
 \def\@abstrakt{\relax}
 \long\def\abstrakt#1{\long\def\@abstrakt{#1}}
@@ -226,25 +240,46 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   {\sffamily \Large
   Univerzita Pavla Jozefa \v{S}af\'arika v Ko\v{s}iciach\par
   Pr\'{\i}rodovedeck\'a fakulta\par\vskip6pt
-  \@ustav
   }
   \par
   %\vspace*{8cm}
   \vfill  
   {
   	\baselineskip=30pt
-  	{\huge \sffamily \bfseries \expandafter\uppercase\expandafter{\@title}}\par\bigskip
+  	{\huge \sffamily \bfseries \MakeUppercase{\@title}}\par\bigskip
   }  
-  {\large \sffamily \bfseries \expandafter\uppercase\expandafter{\@typprace} PR\'ACA}\par
+  {\large \sffamily \bfseries \MakeUppercase{\@typprace} PR\'ACA}\par
   \vspace*{1.4cm}  
-  \par 
+  %\par 
   \vfill
-  {\sffamily \bfseries \@miesto\ \@rok \hfill \@author}
+  \begin{flushleft}%
+  \sffamily
+  \bfseries
+  \begin{tabbing}
+  	MMMMMMMMMMMMM\= \kill
+  	\ifx\@studprog\relax
+  		\relax
+  	\else
+	    \v{S}tudijn\a'{y} program: \> \@studprog\\%pozor! sme v tabbing, akcenty su \a'!
+	\fi
+    \v{S}tudijn\a'{y} odbor: \> \@odbor\\%
+    \v{S}koliace pracovisko: \> \@pracovisko\\%
+    Ved\a'{u}ci z\a'{a}vere\v{c}nej pr\a'{a}ce: \> \@veduci\\%
+    \ifx\@konzultant\relax
+    	\relax
+    \else
+	    Konzultant: \> \@konzultant
+	\fi
+  \end{tabbing}
+  \par
   \vspace*{1cm}
+  {\@miesto\ \@rok \hfill \@author}
+  \end{flushleft}
   \end{center}
 \end{titlepage} 
 \newpage
 % a dalsia strana ide pre vyhlasenie
+\if@showhonesty
 \newpage\thispagestyle{empty}
 \par
 \null
@@ -264,6 +299,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 }  
 \end{minipage}
 \end{center}
+\fi %\if@showhonesty
 % dalsia strana ide pre podakovanie
 \if\@podakovanie\relax%
   \@latex@warning{Je slusne uviest (\noexpand\podakovanie)}%
@@ -285,17 +321,16 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newpage\thispagestyle{empty}  
 \par
 \null
-\vfill
 \begin{center}
-\begin{minipage}{12cm} %nasleduje anglicky ,,abstract"
-  \centerline{{\large\bfseries \@abstractname}}\par\bigskip
-  \@abstract
-\end{minipage}
-\par
-\vspace{3cm}
 \begin{minipage}{12cm} %nasleduje slovensky ,,abstract"
   \centerline{{\large\bfseries \@abstraktname}}\par\bigskip
   \@abstrakt
+\end{minipage}
+\par
+\vspace{3cm}
+\begin{minipage}{12cm} %nasleduje anglicky ,,abstract"
+  \centerline{{\large\bfseries \@abstractname}}\par\bigskip
+  \@abstract
 \end{minipage}
 \end{center}
 \vfill
@@ -814,6 +849,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand\appendixname{Appendix}
 %zakazane, uz je definovane v casti prikazov k Abstraktu --RN
 %  \newcommand\abstractname{Abstract}
+
+
 \def\today{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
