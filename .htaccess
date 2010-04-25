@@ -1,6 +1,0 @@
-AddDescription "Hlavna trieda" rnthesis.cls
-AddDescription "Príklad DP založenej na tejto triede (PDF)" dp-sample.pdf
-AddDescription "Priklad DP založenej na tejto triede (zdrojové kódy)" dp-sample.src.zip
-AddDescription "Štýlový súbor pre podporu vkladania EPS/PDF obrázkov (voliteľný)" rnt-pic.sty
-AddDescription "Štýlový súbor definujúci prostredia pre vety, definície atď (voliteľný)" rnt-thm.sty
-AddDescription "Štýlový súbor definujúci prostredia pre vety, definície atď (voliteľný), variant <I>section</I>" rnt-thm-s.sty

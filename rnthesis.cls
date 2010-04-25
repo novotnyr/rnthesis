@@ -1,7 +1,7 @@
 % Trieda pre diplomove prace. mailto:sk.szm@r.novotny
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2010/04/22 v0.96
+              [2010/04/26 v0.99
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -54,6 +54,10 @@
       }%
    \renewcommand\newblock{\par}}%
 }
+%
+\newif\if@thesisenglish
+\@thesisenglishfalse
+\DeclareOption{english}{\@thesisenglishtrue}
 %
 \newif\if@thesismargins
 \@thesismarginsfalse
@@ -145,7 +149,7 @@
         ##1}}}}
 \fi
 %rok
-\def\@rok{[20??]}
+\def\@rok{\ClassError{rnthesis}{\string\rok{} nebol definovany!}{Definujte v subore prikaz \string\rok !}}
 \newcommand{\rok}[1]{\def\@rok{#1}}
 
 %odbor
@@ -172,51 +176,37 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand{\vyhlasenie}[1]{\long\def\@vyhlasenie{#1}}
 
 %typ prace (bakalarska, diplomova)
-\def\@typprace{diplomov\'a}
 \newcommand{\typprace}[1]{\def\@typprace{#1}}
+%Toto by sme mohli urobit ako \def\@typprace{\ClassError}, ale chybova hlaska by bola velkymi
+%pismenami kvoli \MakeUppercase v maketitle
+\AtBeginDocument{%
+\@ifundefined{@typprace}{%
+		\ClassError{rnthesis}{Nedefinovany typ prace! Definujte v subore \string\typprace{}!}{Priklad: \string\typprace{bakalarska}}%
+	}
+	{\relax}}
+
+%autor. \author je definovany v zakladnom LaTeXu, zodpoveda mu globalne makro \@author, predefinujeme ho z
+%warningu na error
+\def\@author{\@latex@error{Autor \noexpand\author nebol definovany}{Definujte \string\author, priklad: \noexpand\author{Jozef Mak}}} 
 
 %miesto vydania
-\def\@miesto{Ko\v{s}ice}
+\def\@miesto{%
+	\@latex@error{Miesto podania prace \noexpand\miesto nebolo definovane}{Definujte \string\miesto, priklad: \noexpand\miesto{Ko\v{s}ice}}% 
+}%
 \newcommand{\miesto}[1]{\def\@miesto{#1}}
 
-%ciel
-\def\@ciel{\null}
-\newcommand{\ciel}[1]{\def\@ciel{#1}}
-
-%odp. literatura
-\def\@literatura{\null}
-\newcommand{\literatura}[1]{\def\@literatura{#1}}
-
 %veduci
-\def\@veduci{\null}
+\def\@veduci{%
+	\ClassError{rnthesis}{Nedefinovany veduci! Definujte v subore \string\veduci{}!}{Priklad: \string\veduci{doc. RNDr. Jozef Mak, DrSc.}}%
+}
 \newcommand{\veduci}[1]{\def\@veduci{#1}}
 
 %konzultant
 \let\@konzultant\relax
 \newcommand{\konzultant}[1]{\def\@konzultant{#1}}
 
-%oponent
-\def\@oponent{\null}
-\newcommand{\oponent}[1]{\def\@oponent{#1}}
-
-%datum zadania
-\def\@datumzadania{\null}
-\newcommand{\datumzadania}[1]{\def\@datumzadania{#1}}
-
-%datum odovzdania
-\def\@datumodovzdania{\null}
-\newcommand{\datumodovzdania}[1]{\def\@datumodovzdania{#1}}
-
-%datum potvrdenia
-\def\@datumpotvrdenia{\null}
-\newcommand{\datumpotvrdenia}[1]{\def\@datumpotvrdenia{#1}}
-
-%riaditel ustavu
-\def\@riaditelustavu{doc. RNDr. Gabriela Andrejkov\'a, CSc.}
-\newcommand{\riaditelustavu}[1]{\def\@riaditelustavu{#1}}
-
 %pracovisko / katedra
-\def\@pracovisko{\errmessage{Pracovisko nebolo definovane. }}
+\def\@pracovisko{\ClassError{rnthesis}{Pracovisko (\string\pracovisko) nebolo definovane.}{Definujte v subore \string\pracovisko{}! Priklad: \string\pracovisko{Ustav informatiky}}}
 \newcommand{\pracovisko}[1]{\def\@pracovisko{#1}}
 
 % abstrakty: definujeme anglicky AbstraCt a slovensky AbstraKt
@@ -231,6 +221,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \def\@abstractname{Abstract} %redefinovane z LaTeXu
 \def\@abstraktname{Abstrakt}
 
+%univerzita
+
 %-------------\custom maketitle
 \newcommand\m@ketitle{%
 \begin{titlepage}
@@ -238,8 +230,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \null  
   \begin{center}
   {\sffamily \Large
-  Univerzita Pavla Jozefa \v{S}af\'arika v Ko\v{s}iciach\par
-  Pr\'{\i}rodovedeck\'a fakulta\par\vskip6pt
+  \universityname\par
+  \facultyname\par\vskip6pt
   }
   \par
   %\vspace*{8cm}
@@ -248,7 +240,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   	\baselineskip=30pt
   	{\huge \sffamily \bfseries \MakeUppercase{\@title}}\par\bigskip
   }  
-  {\large \sffamily \bfseries \MakeUppercase{\@typprace} PR\'ACA}\par
+  {\large \sffamily \bfseries \MakeUppercase{\@typprace} \MakeUppercase{\thesisname}}\par
   \vspace*{1.4cm}  
   %\par 
   \vfill
@@ -260,15 +252,15 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   	\ifx\@studprog\relax
   		\relax
   	\else
-	    \v{S}tudijn\a'{y} program: \> \@studprog\\%pozor! sme v tabbing, akcenty su \a'!
+	    \studyprogrammename: \> \@studprog\\%pozor! sme v tabbing, akcenty su \a'!
 	\fi
-    \v{S}tudijn\a'{y} odbor: \> \@odbor\\%
-    \v{S}koliace pracovisko: \> \@pracovisko\\%
-    Ved\a'{u}ci z\a'{a}vere\v{c}nej pr\a'{a}ce: \> \@veduci\\%
+    \fieldofstudyname: \> \@odbor\\%
+    \institutename: \> \@pracovisko\\%
+    \tutorname: \> \@veduci\\%
     \ifx\@konzultant\relax
     	\relax
     \else
-	    Konzultant: \> \@konzultant
+	    \counsellorname: \> \@konzultant
 	\fi
   \end{tabbing}
   \par
@@ -310,7 +302,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \vfill
   \begin{center}
   \begin{minipage}{12cm}
-  \centerline{{\large\bfseries Po\v{d}akovanie}}\par\bigskip
+  \centerline{{\large\bfseries \thanksname}}\par\bigskip
   \@podakovanie
   \par
   \end{minipage}
@@ -336,6 +328,22 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \vfill
 }
 %---------end custom maketitle
+% check babel presence
+\AtBeginDocument{%
+	% \let vezme aktualne definovane \bibname v uplne expandovanej podobe. Kedze poradie v AtBeginDocument
+	% je podla poradia loadovania (trieda ma prednost pred stylom babel), 
+	% po naloadovani babelu sa hodnota \thesisbibname uz nezmeni (bude to hodnota
+	% definovana v \bibname nizsie, Zoznam pouzitej literatury).
+	% Ak babel nie je naloadovany, \thesisbibname bude expanziou \bibname, ktora sa moze s loadovanim
+	% dalsich packagov menit.
+	\@ifpackageloaded{babel}{%
+		\iflanguage{slovak}{\let\thesisbibname\bibname\message{\thesisbibname}}{\def\thesisbibname{\bibname}}
+	}{%
+		%package slovak is deprecated, you are supposed to use babel.sty
+		\@ifpackageloaded{slovak}{\let\thesisbibname\bibname}{\def\thesisbibname{\bibname}}
+	}
+}
+%
 \def\ps@myheadings{%
     \let\@oddfoot\@empty\let\@evenfoot\@empty
     \def\@evenhead{\thepage\hfil\slshape\leftmark}%
@@ -435,6 +443,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
                     \@makechapterhead{#2}%
                     \@afterheading
                     }
+                    
 %----------------------redefine \chapter and \chapter*
 \if@thesischapterstyle
 \newlength{\textwidthni}
@@ -793,8 +802,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newdimen\bibindent
 \setlength\bibindent{1.5em}
 \newenvironment{thebibliography}[1]
-     {\chapter*{\bibname
-        \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}}%
+     {\chapter*{\thesisbibname
+        \@mkboth{\MakeUppercase\thesisbibname}{\MakeUppercase\thesisbibname}}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -837,16 +846,36 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
     \parindent 1em%
     \noindent
     \hb@xt@1.8em{\hss\@makefnmark}#1}
-\newcommand\contentsname{Contents}
-\newcommand\listfigurename{List of Figures}
-\newcommand\listtablename{List of Tables}
-\newcommand\bibname{Bibliography}
+\newcommand\contentsname{Obsah}
+\newcommand\listfigurename{Zoznam obr\'azkov}
+\newcommand\listtablename{Zoznam tabuliek}
+\newcommand\bibname{Zoznam pou\v{z}itej literat\'{u}ry} 
 \newcommand\indexname{Index}
-\newcommand\figurename{Figure}
-\newcommand\tablename{Table}
-\newcommand\partname{Part}
-\newcommand\chaptername{Chapter}
-\newcommand\appendixname{Appendix}
+\newcommand\figurename{Obr\'{a}zok} %XXX OVERIT
+\newcommand\tablename{Tabu\v{l}ka}
+\newcommand\partname{\v{C}as\v{t}}
+\newcommand\chaptername{Kapitola}
+\newcommand\appendixname{Dodatok}
+\newcommand\universityname{Univerzita Pavla Jozefa \v{S}af\'arika v Ko\v{s}iciach}
+\newcommand\facultyname{Pr\'{\i}rodovedeck\'a fakulta}
+\newcommand\thesisname{pr\'aca}
+\newcommand\studyprogrammename{\v{S}tudijn\a'{y} program}
+\newcommand\fieldofstudyname{\v{S}tudijn\a'{y} odbor}
+\newcommand\institutename{\v{S}koliace pracovisko}
+\newcommand\tutorname{Ved\a'{u}ci z\a'{a}vere\v{c}nej pr\a'{a}ce}
+\newcommand\counsellorname{Konzultant}
+\newcommand\thanksname{Po\v{d}akovanie}
+\if@thesisenglish
+	\renewcommand\universityname{P. J. Safarik University}
+	\renewcommand\facultyname{Faculty of Science}
+	\renewcommand\thesisname{thesis}
+	\renewcommand\studyprogrammename{Study programme}
+	\renewcommand\fieldofstudyname{Field of Study}
+	\renewcommand\institutename{Institute}
+	\renewcommand\tutorname{Tutor}
+	\renewcommand\counsellorname{Counsellor}
+	\renewcommand\thanksname{Thanks}
+\fi
 %zakazane, uz je definovane v casti prikazov k Abstraktu --RN
 %  \newcommand\abstractname{Abstract}
 

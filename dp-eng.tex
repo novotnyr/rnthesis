@@ -1,31 +1,25 @@
-\documentclass[thesismargins, thesislinespacing, twoside, draft, usesections]{rnthesis}
-\usepackage{slovak}
+\documentclass[english, thesismargins, thesislinespacing, twoside, draft]{rnthesis}
+\usepackage[T1]{fontenc}
+\usepackage[cp1250]{inputenc}
 \usepackage{rnt-pic}
 \usepackage{rnt-thm}
-\usepackage[round]{natbib}
+
+\usepackage{babel}
+
 \title{Umenie neby videnı}
 \author{František Tarabák}
+\typprace{bachelor}
 \rok{2004}
+\miesto{Ko\v{s}ice}
 \podakovanie{
-  Rád by som poïakoval vedúcemu diplomovej
-  práce akad. Františkovi Tarabákovi, DrSc.
-  za cenné pripomienky a za obetavos poèas
-  tvorby mojej diplomovej práce.
+Thanks to my 
 } 
-\ciel{Implementova základné algoritmy pre ¾ubovo¾nú metódu zadanú vedúcim diplomovej práce.
-Tvorivo spracova zadanú problematiku pod¾a príslušnıch kritérií.
-}
-\literatura{
-  \indent Montgomery Jack -- How not to be seen, London 1969.
-  \par\indent Henry Beard -- Bored of the Rings, Harvard Lampoon, 1969
-}
+
 \veduci{akad. František Tarabák, DrSc.}
 \konzultant{akad. Františka Tarabáková, DrSc.}
-\oponent{akad. Ferencz Tarabaque, DrSc.}
-\datumzadania{2. mája 2005}
-\datumodovzdania{2. mája 2006}
-\datumpotvrdenia{6. decembra 2006}
-\riaditelustavu{akad. František Tarabák, DrSc.}
+\pracovisko{Ústav informatiky}
+
+
 
 \abstract{
 Donec dolor arcu, posuere at, vehicula vitae, accumsan ut,
@@ -49,7 +43,7 @@ libero sit amet libero.
 \newpage
 \tableofcontents
 \newpage
-\section{Tradiènı Lipsum}
+\chapter{Tradiènı Lipsum}
 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Integer lacinia, nulla porta varius tempus, lacus metus blandit
@@ -82,7 +76,7 @@ neque. Suspendisse hendrerit lectus id ante. Fusce mattis nunc
 non ipsum. Praesent tristique hendrerit lorem. Morbi risus
 erat, euismod quis.
 
-\subsection{Sit transit gloria mundi}
+\section{Sit transit gloria mundi}
 \begin{df}
 \pojem{Definíciou} nazıvame kadı pojem uzavretı v prostredí 
 \texttt{df}.
@@ -100,10 +94,14 @@ Nunc convallis hendrerit nisl.
 %
 $$m^2=n_1^2+n_2^2$$
 
-\begin{veta}[o ¾uïoch]
-Náhodná velièina $X$ majúca geometrické rozdelenie s parametrom $p$ vyjadruje
-poèet \uv{neúspechov} pred prvım úspechom pri neobmedzenej realizácii pokusov
-v Bernoulliho schéme.
+\begin{veta}[o ludoch]
+Maecenas adipiscing. Proin non risus in
+erat dapibus hendrerit. Sed nonummy, velit sit amet dictum
+eleifend, arcu lacus molestie mauris, a sollicitudin felis
+lacus eget velit. Vivamus imperdiet. Vivamus accumsan
+sollicitudin leo. Morbi et orci. Sed at sem. Vestibulum mattis
+augue. Nam sit amet wisi. Donec vel est. Praesent vehicula.
+Nunc convallis hendrerit nisl.
 \end{veta}
 %
 \begin{dokaz}
@@ -126,7 +124,8 @@ augue. Sed dignissim dictum mauris. Morbi tincidunt leo at est.
 Pellentesque habitant morbi tristique senectus et netus et
 malesuada fames ac turpis egestas. Etiam eu ante in sem dictum
 eleifend. Nunc eget odio. Sed vitae elit at justo tristique
-dapibus. Quisque sit amet urna at velit faucibus cursus.
+dapibus. Quisque sit amet urna at velit faucibus cursus,
+ako bolo ukázané v \cite{1}.
 
 Aliquam commodo wisi sed ipsum. Donec quis ligula. Ut porttitor,
 nibh nec interdum fringilla, risus est nonummy nibh, at rutrum
@@ -178,8 +177,12 @@ metus, convallis eu, euismod in, ultricies nec, felis. Suspendisse
 hendrerit ipsum ac neque pretium consectetuer. Vestibulum et diam
 vitae nulla faucibus mattis. 
 
-%
-\bibliography{dp}
 
+%
+\bibliography{dp} %berie sa z dp.bib
+
+\begin{thebibliography}{9}
+\bibitem{1} Ipsum, L.: Lorem ipsum dolor sit amet.
+\end{thebibliography}
 %
 \end{document}
