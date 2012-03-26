@@ -1,7 +1,7 @@
 % Trieda pre diplomove prace. mailto:sk.szm@r.novotny
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2010/04/26 v0.99
+              [2012/03/27 v1.0
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -79,6 +79,14 @@
 \@showhonestyfalse
 \DeclareOption{showhonesty}{\@showhonestytrue}
 %
+\newif\if@upjsfrontpage
+\@upjsfrontpagefalse
+\DeclareOption{upjsfrontpage}{\@upjsfrontpagetrue}
+%
+\newif\if@disablespecwarning
+\@disablespecwarningfalse
+\DeclareOption{disablespecwarning}{\@disablespecwarningtrue}
+%
 \ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany}
 \ProcessOptions
 \input{size1\@ptsize.clo}
@@ -103,7 +111,7 @@
   %Odporucane okraje: zlava 3,5 cm, sprava 2 cm,
   %zhora a zdola 2,5 cm
   \setlength{\hoffset}{-1in}
-  \setlength{\evensidemargin}{3.6cm} %.1mm pre \marginparsep
+  \setlength{\evensidemargin}{2.1cm} %.1mm pre \marginparsep
   \setlength{\oddsidemargin}{3.6cm} % to iste ako \oddsidemargin
   \setlength{\textwidth}{15.3cm}%21cm - 2 (vonkajsi okraj) -  3.6 (vnutornz okraj) - bulh. konst
 %  
@@ -264,14 +272,20 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 	\fi
   \end{tabbing}
   \par
-  \vspace*{1cm}
-  {\@miesto\ \@rok \hfill \@author}
+  \if@upjsfrontpage
+    \vspace*{3cm}
+    {\@miesto\ \@rok \hfill\break \@author}
+  \else
+    \vspace*{1cm}
+    {\@miesto\ \@rok \hfill \@author}    
+  \fi
   \end{flushleft}
   \end{center}
 \end{titlepage} 
 \newpage
 % a dalsia strana ide pre vyhlasenie
 \if@showhonesty
+\if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
 \newpage\thispagestyle{empty}
 \par
 \null
@@ -296,6 +310,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \if\@podakovanie\relax%
   \@latex@warning{Je slusne uviest (\noexpand\podakovanie)}%
 \else%
+  \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
   \newpage\thispagestyle{empty}
   \par
   \null
@@ -309,7 +324,23 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \end{center}
   \vskip2cm
 \fi
+% dalsia strana pre zadanie, vypiseme boilerplate varovanie
+\if@disablespecwarning\relax
+\else 
+  \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
+  \newpage\thispagestyle{empty}  
+  \par
+  \null
+  \vfill
+  \begin{center}
+  \begin{minipage}{12cm}
+  \flushleft
+  {\LARGE\bf Namiesto tejto strany vlo\v{z}te zadanie z informa\v{c}n\'{e}ho syst\'{e}mu podp\'{\i}san\'{e} ved\'{u}cim \'{u}stavu!}\end{minipage}
+  \end{center}
+  \vfill
+\fi
 % dalsia strana pre abstrakt, treba implementovat, ak chyba
+\if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
 \newpage\thispagestyle{empty}  
 \par
 \null

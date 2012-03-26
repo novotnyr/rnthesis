@@ -1,0 +1,13 @@
+\begin{thebibliography}{Lam86}
+
+\bibitem[Knu84]{knuth84}
+Donald~E. Knuth.
+\newblock {\em The \TeX book, Volume A of Computers and Typesetting}.
+\newblock Addison-Wesley, 1984.
+
+\bibitem[Lam86]{lamport86}
+L.~Lamport.
+\newblock {\em {\LaTeX}, {A} {D}ocument {P}reparation {S}ystem}.
+\newblock Addison-Wesley Publishing Company, 1986.
+
+\end{thebibliography}
