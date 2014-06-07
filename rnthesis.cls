@@ -1,7 +1,7 @@
 % Trieda pre diplomove prace. mailto:sk.szm@r.novotny
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2012/03/27 v1.0
+              [2014/06/08 v1.1
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -74,6 +74,10 @@
 \newif\if@usesections
 \@usesectionsfalse
 \DeclareOption{usesections}{\@usesectionstrue}
+%
+\newif\if@longabstracts
+\@longabstractsfalse
+\DeclareOption{longabstracts}{\@longabstractstrue}
 %
 \newif\if@showhonesty
 \@showhonestyfalse
@@ -339,24 +343,47 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \end{center}
   \vfill
 \fi
-% dalsia strana pre abstrakt, treba implementovat, ak chyba
+% dalsia strana pre abstrakt, treba doimplementovat situaciu, ked chyba
 \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
-\newpage\thispagestyle{empty}  
+\newpage%
+% disable page numbering for abstracts
+\pagestyle{empty}  
 \par
 \null
-\begin{center}
-\begin{minipage}{12cm} %nasleduje slovensky ,,abstract"
-  \centerline{{\large\bfseries \@abstraktname}}\par\bigskip
-  \@abstrakt
-\end{minipage}
+%set margin length for abstra[ck]ts
+\newlength{\@abstractmargin}
+\setlength{\@abstractmargin}{1.7cm}
+%nasleduje slovensky ,,abstract"
+\centerline{{\large\bfseries \@abstraktname}}\par\bigskip
+\begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{\@abstractmargin}%
+    \setlength{\rightmargin}{\@abstractmargin}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]\@abstrakt
+\end{list}
 \par
 \vspace{3cm}
-\begin{minipage}{12cm} %nasleduje anglicky ,,abstract"
-  \centerline{{\large\bfseries \@abstractname}}\par\bigskip
-  \@abstract
-\end{minipage}
-\end{center}
+\if@longabstracts\newpage\fi
+%nasleduje anglicky ,,abstract"
+\centerline{{\large\bfseries \@abstractname}}\par\bigskip
+\begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{\@abstractmargin}%
+    \setlength{\rightmargin}{\@abstractmargin}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]\@abstract
+\end{list}
 \vfill
+% restore page numbering
+\thispagestyle{empty} % ... but leave last page without page number
+\pagestyle{plain}  
 }
 %---------end custom maketitle
 % check babel presence
