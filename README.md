@@ -1,12 +1,12 @@
-Trieda pre diplomové, bakalárske a ďalšie práce v LaTeXu
-========================================================
+O produkte
+==========
 
 `rn-thesis` je trieda pre tvorbu záverečných prác v LaTeXu v súlade so [smernicami UPJŠ](http://www.upjs.sk/pracoviska/univerzitna-kniznica/zaverecne-prace/).
 
 Ako začať
 =========
 
-Šablóna dodržiava zvyklosti definované v základnej LaTeXovskej triede `article`. Minimalistická verzia vyzerá nasledovne:
+Šablóna dodržiava zvyklosti definované v základnej LaTeXovskej triede article. Minimalistická verzia vyzerá nasledovne:
 
 	\documentclass{rnthesis}
 	\usepackage[slovak]{babel}
@@ -34,20 +34,20 @@ Následne prekompilovať pomocou
 Rozširujúce príkazy
 ====================
 
-Šablóna podporuje množstvo príkazov, ktoré prispôsobujú vzhľad. Podrobnosti nájdete v [zozname príkazov vo Wiki](https://github.com/novotnyr/rnthesis/wiki/Mo%C5%BEnosti-triedy-a-zoznam-pr%C3%ADkazov).
+Šablóna podporuje množstvo príkazov, ktoré prispôsobujú vzhľad. Podrobnosti nájdete v [zozname príkazov vo Wiki](#).
 
 Ďalšie štýly
 ============
 
-*	Štýl `rnt-thm` uľahčuje písanie definícií, viet, dôkazov. Podrobnosti nájdete vo [Wiki](https://github.com/novotnyr/rnthesis/wiki/rnt-thm.sty:-%C5%A1t%C3%BDl-pre-vety,-defin%C3%ADcie-a-d%C3%B4kazy).
-*	Štýl `rnt-pic` uľahčuje vkladanie obrázkov (Podrobnosti nájdete vo [Wiki](https://github.com/novotnyr/rnthesis/wiki/rnt-pic.sty:-%C5%A1t%C3%BDl-pre-jednoduch%C3%A9-vkladanie-obr%C3%A1zkov).
+*	Štýl `rnt-thm` uľahčuje písanie definícií, viet, dôkazov. Podrobnosti nájdete vo [Wiki](#).
+*	Štýl `rnt-pic` uľahčuje vkladanie obrázkov (Podrobnosti nájdete vo [Wiki](#).
 
 Prispôsobenie pre iné univerzity
 ================================
 
 Šablóna podporuje prispôsobenie textov pre iné univerzity či dokonca iné jazyky.
 
-Podrobnosti nájdete v stati [o preddefinovaných textoch vo Wiki](https://github.com/novotnyr/rnthesis/wiki/Preddefinovan%C3%A9-texty).
+Podrobnosti nájdete v stati [o preddefinovaných textoch vo Wiki](#).
 
 Prispôsobenie pre iné jazyky
 =============================
@@ -57,8 +57,8 @@ Prispôsobenie pre iné jazyky
 	\documentclass[english]{rnthesis}
 	\usepackage{babel}
 
-Podrobnosti nájdete v stati [o preddefinovaných textoch vo Wiki](https://github.com/novotnyr/rnthesis/wiki/Preddefinovan%C3%A9-texty).
+Podrobnosti nájdete v stati [o preddefinovaných textoch vo Wiki](#).
 
 FAQ
 ===
-FAQ sa nachádza [vo Wiki](#).
+FAQ sa nachádza [vo Wiki](https://github.com/novotnyr/rnthesis/wiki/FAQ:-%C4%8Casto-kladen%C3%A9-ot%C3%A1zky).
