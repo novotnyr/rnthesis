@@ -1,7 +1,7 @@
-% Trieda pre diplomove prace. mailto:sk.szm@r.novotny
+% Trieda pre diplomove prace. https://github.com/novotnyr/rnthesis
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2014/06/08 v1.1
+              [2016/08/14 v1.2
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
