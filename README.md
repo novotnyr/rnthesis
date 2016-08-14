@@ -34,13 +34,13 @@ Následne prekompilovať pomocou
 Rozširujúce príkazy
 ====================
 
-Šablóna podporuje množstvo príkazov, ktoré prispôsobujú vzhľad. Podrobnosti nájdete v [zozname príkazov vo Wiki](#).
+Šablóna podporuje množstvo príkazov, ktoré prispôsobujú vzhľad. Podrobnosti nájdete v [zozname príkazov vo Wiki](https://github.com/novotnyr/rnthesis/wiki/Mo%C5%BEnosti-triedy-a-zoznam-pr%C3%ADkazov).
 
 Ďalšie štýly
 ============
 
-*	Štýl `rnt-thm` uľahčuje písanie definícií, viet, dôkazov. Podrobnosti nájdete vo [Wiki](#).
-*	Štýl `rnt-pic` uľahčuje vkladanie obrázkov (Podrobnosti nájdete vo [Wiki](#).
+*	Štýl `rnt-thm` uľahčuje písanie definícií, viet, dôkazov. Podrobnosti nájdete vo [Wiki](https://github.com/novotnyr/rnthesis/wiki/rnt-thm.sty:-%C5%A1t%C3%BDl-pre-vety,-defin%C3%ADcie-a-d%C3%B4kazy).
+*	Štýl `rnt-pic` uľahčuje vkladanie obrázkov (Podrobnosti nájdete vo [Wiki](https://github.com/novotnyr/rnthesis/wiki/rnt-thm.sty:-%C5%A1t%C3%BDl-pre-vety,-defin%C3%ADcie-a-d%C3%B4kazy).
 
 Prispôsobenie pre iné univerzity
 ================================
