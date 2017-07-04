@@ -217,6 +217,11 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \let\@konzultant\relax
 \newcommand{\konzultant}[1]{\def\@konzultant{#1}}
 
+%konzultanti
+\let\@konzultanti\relax
+\newcommand{\konzultanti}[1]{\def\@konzultanti{#1}}
+
+
 %pracovisko / katedra
 \def\@pracovisko{\ClassError{rnthesis}{Pracovisko (\string\pracovisko) nebolo definovane.}{Definujte v subore \string\pracovisko{}! Priklad: \string\pracovisko{Ustav informatiky}}}
 \newcommand{\pracovisko}[1]{\def\@pracovisko{#1}}
@@ -274,6 +279,11 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
     \else
 	    \counsellorname: \> \@konzultant
 	\fi
+    \ifx\@konzultanti\relax
+      \relax
+    \else
+      \counsellorsname: \> \@konzultanti
+  \fi
   \end{tabbing}
   \par
   \if@upjsfrontpage
@@ -922,6 +932,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand\institutename{\v{S}koliace pracovisko}
 \newcommand\tutorname{Ved\a'{u}ci z\a'{a}vere\v{c}nej pr\a'{a}ce}
 \newcommand\counsellorname{Konzultant}
+\newcommand\counsellorsname{Konzultanti}
 \newcommand\thanksname{Po\v{d}akovanie}
 \if@thesisenglish
 	\renewcommand\universityname{P. J. Safarik University}
