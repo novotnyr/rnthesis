@@ -78,6 +78,7 @@
 \newif\if@longabstracts
 \@longabstractsfalse
 \DeclareOption{longabstracts}{\@longabstractstrue}
+\DeclareOption{combineabstracts}{\@longabstractsfalse}
 %
 \newif\if@showhonesty
 \@showhonestyfalse
@@ -91,7 +92,7 @@
 \@disablespecwarningfalse
 \DeclareOption{disablespecwarning}{\@disablespecwarningtrue}
 %
-\ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany}
+\ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany,longabstracts}
 \ProcessOptions
 \input{size1\@ptsize.clo}
 \setlength\lineskip{1\p@}
@@ -395,7 +396,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newpage%
 % disable page numbering for abstracts
 \pagestyle{empty}  
-\par
+\par\bigskip
 \null
 %set margin length for abstra[ck]ts
 \newlength{\@abstractmargin}
