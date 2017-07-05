@@ -254,6 +254,11 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %univerzita
 
+%------------- Uvod a zaver
+\newcommand{\chapternonumber}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\uvod}{\chapternonumber{\'Uvod}}
+\newcommand{\zaver}{\chapternonumber{Z\'aver}}
+
 %------------- Prilohy
 \newcommand{\prilohy}{%
   \appendix
