@@ -189,13 +189,26 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %typ prace (bakalarska, diplomova)
 \newcommand{\typprace}[1]{\def\@typprace{#1}}
+%iny typ prace ("dizertacny projekt")
+\newcommand{\inytypprace}[1]{\def\@inytypprace{#1}}
+
 %Toto by sme mohli urobit ako \def\@typprace{\ClassError}, ale chybova hlaska by bola velkymi
 %pismenami kvoli \MakeUppercase v maketitle
 \AtBeginDocument{%
-\@ifundefined{@typprace}{%
-		\ClassError{rnthesis}{Nedefinovany typ prace! Definujte v subore \string\typprace{}!}{Priklad: \string\typprace{bakalarska}}%
-	}
-	{\relax}}
+  \@ifundefined{@typprace}{%
+    \@ifundefined{@inytypprace}{%
+      \ClassError{rnthesis}%
+        {Nedefinovany typ prace! Definujte v subore \string\typprace{} alebo \string\inytypprace{}!}%
+        {Priklad: \string\typprace{bakalarska} alebo \string\inytypprace{projekt}}%
+    }%
+    {% else (ak je iny typ prace definovany, nerobime nic)
+      \relax
+    }%
+  }%else (ak je bezny typ prace definovany, tesime sa, nerobime nic specialne)
+  {%
+    \relax
+  }%
+}
 
 %autor. \author je definovany v zakladnom LaTeXu, zodpoveda mu globalne makro \@author, predefinujeme ho z
 %warningu na error
@@ -257,9 +270,14 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   	\baselineskip=30pt
   	{\huge \sffamily \bfseries \MakeUppercase{\@title}}\par\bigskip
   }  
-  {\large \sffamily \bfseries \MakeUppercase{\@typprace} \MakeUppercase{\thesisname}}\par
-  \vspace*{1.4cm}  
-  %\par 
+  {\large \sffamily \bfseries 
+    \@ifundefined{@inytypprace}{% pouzime bezny \typprace
+      \MakeUppercase{\@typprace} \MakeUppercase{\thesisname}%
+    }{%
+      \MakeUppercase{\@inytypprace}%
+    }%
+  }\par
+  \vspace*{1.4cm}    
   \vfill
   \begin{flushleft}%
   \sffamily
