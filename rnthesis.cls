@@ -71,6 +71,10 @@
 \@thesischapterstylefalse
 \DeclareOption{thesischapterstyle}{\@thesischapterstyletrue}
 %
+\newif\if@onelinechapterstyle
+\@onelinechapterstylefalse
+\DeclareOption{onelinechapterstyle}{\@onelinechapterstyletrue}
+%
 \newif\if@usesections
 \@usesectionsfalse
 \DeclareOption{usesections}{\@usesectionstrue}
@@ -616,35 +620,60 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
   \par
   \vskip6\bigskipamount  
 }
-\else%thesischapterstyle is off, use declaration from book.cls
-\def\@makechapterhead#1{%
-  \vspace*{50\p@}%
-  {\parindent \z@ \raggedright \normalfont
-    \ifnum \c@secnumdepth >\m@ne
-      %\if@mainmatter %ignore mainmatter
-        \huge\bfseries \@chapapp\space \thechapter
-        \par\nobreak
-        \vskip 20\p@
-      %\fi
-    \fi
-    \interlinepenalty\@M
-    \Huge \bfseries #1\par\nobreak
-    \vskip 40\p@
-  }}
-\def\@schapter#1{\if@twocolumn
-                   \@topnewpage[\@makeschapterhead{#1}]%
-                 \else
-                   \@makeschapterhead{#1}%
-                   \@afterheading
-                 \fi}
-\def\@makeschapterhead#1{%
-  \vspace*{50\p@}%
-  {\parindent \z@ \raggedright
-    \normalfont
-    \interlinepenalty\@M
-    \Huge \bfseries  #1\par\nobreak
-    \vskip 40\p@
-  }}
+\else%
+  \if@onelinechapterstyle
+  \def\@makechapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright \normalfont
+      \interlinepenalty\@M
+      \Huge \bfseries \thechapter\hspace{0.5em} #1\par\nobreak
+      \vskip 40\p@
+    }}
+  \def\@schapter#1{\if@twocolumn
+                     \@topnewpage[\@makeschapterhead{#1}]%
+                   \else
+                     \@makeschapterhead{#1}%
+                     \@afterheading
+                   \fi}
+  \def\@makeschapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright
+      \normalfont
+      \interlinepenalty\@M
+      \Huge \bfseries  #1\par\nobreak
+      \vskip 40\p@
+    }}  
+  \else
+  %thesischapterstyle is off, use declaration from book.cls
+  \def\@makechapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright \normalfont
+      \ifnum \c@secnumdepth >\m@ne
+        %\if@mainmatter %ignore mainmatter
+          \huge\bfseries \@chapapp\space \thechapter
+          \par\nobreak
+          \vskip 20\p@
+        %\fi
+      \fi
+      \interlinepenalty\@M
+      \Huge \bfseries #1\par\nobreak
+      \vskip 40\p@
+    }}
+  \def\@schapter#1{\if@twocolumn
+                     \@topnewpage[\@makeschapterhead{#1}]%
+                   \else
+                     \@makeschapterhead{#1}%
+                     \@afterheading
+                   \fi}
+  \def\@makeschapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright
+      \normalfont
+      \interlinepenalty\@M
+      \Huge \bfseries  #1\par\nobreak
+      \vskip 40\p@
+    }}
+  \fi  
 \fi
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
