@@ -253,6 +253,25 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %univerzita
 
+%------------- Prilohy
+\newcommand{\prilohy}{%
+  \appendix
+  \chapter*{Pr\'ilohy}
+  \addtocontents{toc}{%
+    \contentsline{chapter}{\appendicesname}{}%
+  }
+}%
+\newcommand{\priloha}[1]{%
+  % priloha sa renderuje ako 'chapter', ale v TOC musi vyzerat ako 'section'  
+  %
+  % zvysime pocitadlo priloh, aj ked ho nezobrazujeme v TOCku. Dame ho do TOC rucne
+  \refstepcounter{chapter}
+  % vyrenderujeme nadpis prilohy/kapitoly na stranku, ale do TOC ju nedame
+  \chapter*{#1}
+  % do TOC to dame rucne ako 'section'
+  \addcontentsline{toc}{section}{\protect\numberline{\thechapter}#1} 
+}%
+
 %-------------\custom maketitle
 \newcommand\m@ketitle{%
 \begin{titlepage}
@@ -423,7 +442,10 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 	% Ak babel nie je naloadovany, \thesisbibname bude expanziou \bibname, ktora sa moze s loadovanim
 	% dalsich packagov menit.
 	\@ifpackageloaded{babel}{%
-		\iflanguage{slovak}{\let\thesisbibname\bibname\message{\thesisbibname}}{\def\thesisbibname{\bibname}}
+		\iflanguage{slovak}{%
+      \let\thesisbibname\bibname\message{\thesisbibname}%
+      \addto\captionsslovak{\renewcommand{\appendixname}{Pr\'iloha}}
+    }{\def\thesisbibname{\bibname}}
 	}{%
 		%package slovak is deprecated, you are supposed to use babel.sty
 		\@ifpackageloaded{slovak}{\let\thesisbibname\bibname}{\def\thesisbibname{\bibname}}
@@ -941,7 +963,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand\tablename{Tabu\v{l}ka}
 \newcommand\partname{\v{C}as\v{t}}
 \newcommand\chaptername{Kapitola}
-\newcommand\appendixname{Dodatok}
+\newcommand\appendicesname{Pr\'ilohy}
+\newcommand\appendixname{Pr\'iloha}
 \newcommand\universityname{Univerzita Pavla Jozefa \v{S}af\'arika v Ko\v{s}iciach}
 \newcommand\facultyname{Pr\'{\i}rodovedeck\'a fakulta}
 \newcommand\thesisname{pr\'aca}
@@ -962,6 +985,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 	\renewcommand\tutorname{Tutor}
 	\renewcommand\counsellorname{Counsellor}
 	\renewcommand\thanksname{Thanks}
+  \renewcommand\appendixname{Appendix}
 \fi
 %zakazane, uz je definovane v casti prikazov k Abstraktu --RN
 %  \newcommand\abstractname{Abstract}
