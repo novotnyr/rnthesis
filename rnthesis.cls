@@ -396,12 +396,16 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newpage%
 % disable page numbering for abstracts
 \pagestyle{empty}  
-\par\bigskip
+\par
 \null
 %set margin length for abstra[ck]ts
 \newlength{\@abstractmargin}
 \setlength{\@abstractmargin}{1.7cm}
+%odstup od horneho okraja pre abstrakt
+\newlength{\abstracttopmargin}
+\setlength{\abstracttopmargin}{3cm}
 %nasleduje slovensky ,,abstract"
+\vspace{\abstracttopmargin} % vertikalna medzera od okraja
 \centerline{{\large\bfseries \@abstraktname}}\par\bigskip
 \begin{list}{}{%
     \setlength{\topsep}{0pt}%
@@ -416,7 +420,10 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \par
 \vspace{3cm}
 \if@longabstracts\newpage\fi
+\par
+\null
 %nasleduje anglicky ,,abstract"
+\vspace{\abstracttopmargin} % vertikalna medzera od okraja
 \centerline{{\large\bfseries \@abstractname}}\par\bigskip
 \begin{list}{}{%
     \setlength{\topsep}{0pt}%
