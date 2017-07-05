@@ -2,3 +2,8 @@
 *.log
 *.toc
 *.dvi
+test-cases/*.aux
+test-cases/*.log
+test-cases/*.toc
+test-cases/*.dvi
+test-cases/*.pdf
