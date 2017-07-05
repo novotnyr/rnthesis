@@ -256,7 +256,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %------------- Uvod a zaver
 \newcommand{\chapternonumber}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
-\newcommand{\uvod}{\chapternonumber{\'Uvod}}
+\newcommand{\uvod}{\chapternonumber{\'Uvod}\thispagestyle{empty}}
 \newcommand{\zaver}{\chapternonumber{Z\'aver}}
 
 %------------- Prilohy
@@ -834,6 +834,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
                \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
         \@starttoc{toc}%
         \if@restonecol\twocolumn\fi
+        \thispagestyle{empty} %obsah nesmie mat cislovanie
         }
  \else
     \newcommand\tableofcontents{%
@@ -843,6 +844,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
                 \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
          \@starttoc{toc}%
          \if@restonecol\twocolumn\fi
+         \thispagestyle{empty} %obsah nesmie mat cislovanie
          }
 \fi
 \newcommand*\l@part[2]{%
