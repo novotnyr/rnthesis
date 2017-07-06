@@ -282,19 +282,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand{\prilohy}{%
   \appendix
   \chapter*{Pr\'ilohy}
-  \addtocontents{toc}{%
-    \contentsline{chapter}{\appendicesname}{}%
-  }
-}%
-\newcommand{\priloha}[1]{%
-  % priloha sa renderuje ako 'chapter', ale v TOC musi vyzerat ako 'section'  
-  %
-  % zvysime pocitadlo priloh, aj ked ho nezobrazujeme v TOCku. Dame ho do TOC rucne
-  \refstepcounter{chapter}
-  % vyrenderujeme nadpis prilohy/kapitoly na stranku, ale do TOC ju nedame
-  \chapter*{#1}
-  % do TOC to dame rucne ako 'section'
-  \addcontentsline{toc}{section}{\protect\numberline{\thechapter}#1} 
+  \addcontentsline{toc}{chapter}{\appendicesname}
 }%
 
 %-------------\custom maketitle
@@ -588,6 +576,26 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
                     \@afterheading
                     }
                     
+% definujeme prilohy
+\newcommand\priloha{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@priloha\@schapter}
+\def\@priloha[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{section}%
+                                   {\protect\numberline{\thechapter}#1}%
+                    \else
+                      \addcontentsline{toc}{section}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \@makechapterhead{#2}%
+                    \@afterheading
+                    }                    
 %----------------------redefine \chapter and \chapter*
 \if@thesischapterstyle
 \newlength{\textwidthni}
