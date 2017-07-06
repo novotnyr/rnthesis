@@ -117,19 +117,22 @@
 \renewcommand\dbltopfraction{.7}
 \renewcommand\dblfloatpagefraction{.5}
 \if@thesismargins
-  %Odporucane okraje: zlava 3,5 cm, sprava 2 cm,
-  %zhora a zdola 2,5 cm
-  \setlength{\hoffset}{-1in}
-  \setlength{\evensidemargin}{2.1cm} %.1mm pre \marginparsep
-  \setlength{\oddsidemargin}{3.6cm} % to iste ako \oddsidemargin
-  \setlength{\textwidth}{15.3cm}%21cm - 2 (vonkajsi okraj) -  3.6 (vnutornz okraj) - bulh. konst
-%  
-  \setlength{\voffset}{-1in} % resetnime vrch stranky na 0pt
-  \setlength{\topmargin}{2.5cm} 
-  \setlength{\headheight}{0cm} % zahlavia nepouzivame
-  \setlength{\headsep}{0cm} % zahlavia nepouzivame  
-  \setlength{\footskip}{1.5cm}
-  \setlength{\textheight}{24.69cm} % 29.69cm - 2.5cm (topmargin) - 1.5cm (footskip) - 1cm (footskip + toto = 2.5cm)
+  \def\@setthesismargins{%
+    %Odporucane okraje: zlava 3,5 cm, sprava 2 cm,
+    %zhora a zdola 2,5 cm
+    \setlength{\hoffset}{-1in}
+    \setlength{\evensidemargin}{2.1cm} %.1mm pre \marginparsep
+    \setlength{\oddsidemargin}{3.6cm} % to iste ako \oddsidemargin
+    \setlength{\textwidth}{15.3cm}%21cm - 2 (vonkajsi okraj) -  3.6 (vnutornz okraj) - bulh. konst
+  %  
+    \setlength{\voffset}{-1in} % resetnime vrch stranky na 0pt
+    \setlength{\topmargin}{2.5cm} 
+    \setlength{\headheight}{0cm} % zahlavia nepouzivame
+    \setlength{\headsep}{0cm} % zahlavia nepouzivame  
+    \setlength{\footskip}{1.5cm}
+    \setlength{\textheight}{24.69cm} % 29.69cm - 2.5cm (topmargin) - 1.5cm (footskip) - 1cm (footskip + toto = 2.5cm)
+  }
+  \@setthesismargins
 \fi
 \if@thesislinespacing
   \def\baselinestretch{1.4}
@@ -257,6 +260,18 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \def\@abstraktname{Abstrakt}
 
 %univerzita
+
+%------------- Zadanie
+\def\@pdfzadanie{\relax}
+\newcommand{\pdfzadanie}[1]{%
+  \def\@pdfzadanie{%
+    \setlength{\voffset}{0in}
+    \setlength{\hoffset}{0in}
+    \includepdf[pages={1},fitpaper=true]{#1}
+    \@setthesismargins %obnovime okraje
+  }%
+}
+
 
 %------------- Uvod a zaver
 \newcommand{\chapternonumber}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
@@ -389,16 +404,20 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \if@disablespecwarning\relax
 \else 
   \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
-  \newpage\thispagestyle{empty}  
-  \par
-  \null
-  \vfill
-  \begin{center}
-  \begin{minipage}{12cm}
-  \flushleft
-  {\LARGE\bf Namiesto tejto strany vlo\v{z}te zadanie z informa\v{c}n\'{e}ho syst\'{e}mu podp\'{\i}san\'{e} ved\'{u}cim \'{u}stavu!}\end{minipage}
-  \end{center}
-  \vfill
+  \ifx\@pdfzadanie\relax%
+    \newpage\thispagestyle{empty}  
+    \par
+    \null
+    \vfill
+    \begin{center}
+    \begin{minipage}{12cm}
+    \flushleft
+    {\LARGE\bf Namiesto tejto strany vlo\v{z}te zadanie z informa\v{c}n\'{e}ho syst\'{e}mu podp\'{\i}san\'{e} ved\'{u}cim \'{u}stavu!}\end{minipage}
+    \end{center}
+    \vfill
+  \else%
+    \@pdfzadanie%
+  \fi%
 \fi
 % dalsia strana pre abstrakt, treba doimplementovat situaciu, ked chyba
 \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
