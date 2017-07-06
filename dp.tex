@@ -6,7 +6,10 @@
 
 \usepackage{rnt-pic}
 \usepackage{rnt-thm}
+
 \usepackage{pdfpages} %vkladanie pdf stran do prace
+
+\usepackage[hyphens]{url} % format a zalamovanie URL adries
 
 \title{Umenie nebyť videný}
 \author{Bc. František Tarabák}
@@ -208,7 +211,103 @@ Ut lobortis semper risus, non condimentum dui convallis ut. Nulla eget volutpat 
 
 %\renewcommand{\bibname}{Zoznam použitej literatúry}
 \begin{thebibliography}{9}
-\bibitem{1} Ipsum, L.: Lorem ipsum dolor sit amet.
+% Príklady popisu dokumentov citácií podľa systému meno a dátum (Harvardský systém)
+% ----
+% Varianty zápisov autorov:
+%	[1] GUZANIN, Štefan, Robert SABOVČÍK a Pavol KAČMÁR. Priezviská vždy VEĽKÝMI PÍSMENAMI,
+%		priezvisko prvého autora je vždy pred menom, druhý a ďalší autor majú zápis
+%		Meno PRIEZVISKO
+%	[2] Neuvádzať rodné mená autorov.
+%	[3] Verzálky nie sú povinné, možno použiť aj iné indikatívnejšie označenie
+%
+% ---	
+% 1. Knižná publikácia (monografia, učebnica, zborník ...)
+%   1 autor
+\bibitem{2}
+	\osoba{Beck, G.}, 2007. \emph{Zakázaná rétorika: 30 manipulatívních technik}. Preklad
+\osoba{Pomikálová, M.}. Praha: Grada Publishing. ISBN 978-80-247-1743-2.
+\bibitem{3}
+	\osoba{Vojčík, P.}, 2010. \emph{Občianske právo hmotné II.} 3. prep. a dopl. vyd. Košice: UPJŠ v Košiciach. ISBN 978-80-7097-817-7.
+%  2 autori
+\bibitem{4}
+	\osoba{Šoltés, M.} a \osoba{Radoňák, J.}, 2013. \emph{Základné princípy laparoskopickej chirurgie.} Košice: UPJŠ v Košiciach. ISBN 978-80-8152-074-7.
+% 3 autori
+\bibitem{5}
+	\osoba{Guzanin, Š.}, \osoba{Sabovčík, R.} a \osoba{Kačmár, P.}, 2004. \emph{Selected Chapters of Plastic and Reconstructive Surgery: vysokoškolské učebné texty}. Košice: Univerzita Pavla Jozefa Šafárika v Košiciach, Lekárska fakulta. ISBN 80-7097-557-1.
+% 4 a viac autorov
+\bibitem{6}
+	\osoba{Nagyová, I.} et al. 2009. \emph{Measuring health and quality of life in the chronically ill}. Košice: Equilibria. ISBN 978-80-892-8446-7.
+% Elektronická kniha
+\bibitem{7}
+	\osoba{Speight, J. G.}, 2005. \emph{Lange's Handbook of Chemistry} [online]. London: McGraw-Hill. [cit. 2009.06.10.] ISBN 978-1-60119-261-5. Dostupné na: \url{http://www.knovel.com/web/portal/basic_search/display?_EXT_KNOVEL_DISPLAY_bookid=1347&_EXT_KNOVEL_DISPLAY_fromSearch=true&_EXT_KNOVEL_DISPLAY_searchType=basic}
+% zborník
+\bibitem{8}
+	\osoba{Bačkor, M.} a \osoba{Mihaličová, S.}, zost., 2013. \emph{Zborník príspevkov z konferencie 11. dni doktorandov experimentálnej biológie rastlín a 13. konferencie experimentálnej biológie rastlín} [online]. Košice: Univerzita Pavla Jozefa Šafárika v Košiciach, Prírodovedecká fakulta [cit. 2009-06-10]. ISBN 9788081520327. Dostupné na: \url{
+http://www.upjs.sk/public/media/5596/PF-Zbornik-prispevkov-konferencie-11-dni-doktorandov.pdf}
+%
+% 2. Časopis (ako celok)
+\bibitem{9}
+	\emph{Thaiszia: Journal of Botany}. Košice: P.J.Safarik University, Botanic Garden, \mbox{1990--\ .} ISSN 1210-0420.
+\bibitem{10}
+	\emph{Ikaros: elektronický časopis o informační bezpečnosti} [online], 2002. [Praha]: Ikaros. 1997--{} [cit. 2002-03-08]. Dostupné na: \url{http://www.ikaros.cz/}. ISSN 1212-5075.
+% Jedno číslo časopisu
+\bibitem{11}
+	\emph{CHIP: magazín informačních technologií}, 2013. Praha: Burda Praha, roč. 23, říjen. ISSN 1210-0684.
+%  ------
+%  3. Príspevok v knihe/zborníku
+%  ------
+\bibitem{12}
+	\osoba{Sabol, J.}, 2000. Jazyk ako ľudské posolstvo: (namiesto doslovu). In: \emph{O jazyku a štýle kriticky aj prakticky}. Prešov: Náuka, s. 149--159. ISBN 809676022X.
+\bibitem{13}
+	\osoba{Tóthová, E.} a kol., 2013. A rare t(9,22,16)(q34,q11,q24) translocation in chronic myeloid leukemia for which imatinib mesylate was effective: a case report. In: \emph{XXVII. Olomoucké hematologické dny s mezinárodní účastí, 12.--14.5.2013, Olomouc: sborník abstrakt}. Olomouc: Univerzita Palackého v Olomouci, s. 75--76. ISBN 9788024434803.
+%  ------
+% 4. Článok v časopise
+%  ------
+\bibitem{14}
+	\osoba{Beňačka, J.} et al., 2009. A better cosine approximate solution to pendulum equation. In: \emph{International Journal of Mathematical Education in Science and Technology}. Vol. 40, no. 2, p. 206--215. ISSN 0020-739X.
+\bibitem{15} 
+	\osoba{Dubayová, T.} et al., 2010. The impact of the intensity of fear on patient's delay regarding health care seeking behavior: a systematic review vyhľadaní zdravotníckej starostlivosti. In: \emph{International Journal of Public Health}. Vol. 55, no. 5, p. 459--468. ISSN 1661-8556.
+\bibitem{16} 
+	\osoba{Steinerová, J.}, 2000. Princípy formovania vzdelania v informačnej vede. In: \emph{Pedagogická revue}. Roč. 2, č. 3, s. 8--16. ISSN 1335-1982.
+\bibitem{17}
+	\osoba{Hoggan, D.}, 2002. Challenges, Strategies, and Tools for Research Scientists. In: \emph{Electronic Journal of Academic and Special Librarianship} [online]. Vol. 3, no. 3 [cit. 2013-01-10]. ISSN 1525-321X. Dostupné na: \url{http://southernlibrarianship.icaap.org/content/v03n03/Hoggan_d01.htm}
+\bibitem{18}
+	\osoba{Srbecká, Gabriela}, 2010. Rozvoj kompetencí studentů ve vzdělávání. In: \emph{Inflow: information journal} [online]. Roč. 3, č. 7 [cit. 2013-08-06]. ISSN 1802-9736. Dostupné na: \url{http://www.inflow.cz/rozvoj-kompetenci-studentu-ve-vzdelavani}
+%  ------
+% 5. Príspevok v zborníku na CD-ROM
+%  ------
+\bibitem{19}
+	\osoba{Zemánek, P.}, 2001. The machines for ``green works'' in vineyards and their economical evaluation. In: \emph{9th International Conference: proceedings. Vol. 2. Fruit Growing and viticulture} [CD-ROM]. Lednice: Mendel University of Agriculture and Forestry, p. 262--268. ISBN 80-7157-524-0.
+%  ------
+% 6. Záverečné a kvalifikačné práce
+%  ------
+\bibitem{20} 
+	\osoba{Mikulášiková, M.}, 1999. \emph{Didaktické pomôcky pre praktickú výučbu na hodinách výtvarnej výchovy pre 2. stupeň základných škôl}: diplomová práca. Nitra: UKF.
+\bibitem{21} 
+	\osoba{Urdzík, P.}, 2007. \emph{Predikcia intrauterinnej rastovej retardácie a preeklampsie pomocou biochemických a ultrazvukových markerov}: dizertačná práca. Košice: UPJŠ v Košiciach.
+%  ------
+% 7. Výskumné správy
+%  ------
+\bibitem{22} 
+	\osoba{Baumgartner, J.} a kol., 1998. \emph{Ochrana a udržiavanie genofondu zvierat, šľachtenie zvierat}: výskumná správa. Nitra: VÚŽV.
+%  ------
+% 8. Normy
+%  ------
+\bibitem{23}
+	STN ISO 690: 2012. \emph{Informácie a dokumentácia. Návod na tvorbu bibliografických odkazov na informačné pramene a ich citovanie}.
+%  ------
+% 9. Mapa
+%  ------
+\bibitem{24} 
+	VKÚ, 2003. \emph{Košice: mapa okolia}. [1:15000]. 3. vyd. Harmanec: VKÚ. ISBN 80-8042-223-0.
+%  ------
+% 10. Zákon
+%  ------
+\bibitem{25} 
+	\emph{Zákon č.131/2002 Zb. o vysokých školách a o zmene a doplnení niektorých zákonov.}
+\bibitem{26} 
+	\emph{Zákon č. 313/2001 o verejnej službe.}
+
 \end{thebibliography}
 %
 %
