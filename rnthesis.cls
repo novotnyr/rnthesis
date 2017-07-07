@@ -287,13 +287,13 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %------------- Uvod a zaver
 \newcommand{\chapternonumber}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
-\newcommand{\uvod}{\chapternonumber{\'Uvod}\thispagestyle{empty}}
-\newcommand{\zaver}{\chapternonumber{Z\'aver}}
+\newcommand{\uvod}{\chapternonumber{\introductionname}\thispagestyle{empty}}
+\newcommand{\zaver}{\chapternonumber{\conclusionname}}
 
 %------------- Prilohy
 \newcommand{\prilohy}{%
   \appendix
-  \chapter*{Pr\'ilohy}
+  \chapter*{\appendicesname}
   \addcontentsline{toc}{chapter}{\appendicesname}
 }%
 
@@ -1066,6 +1066,8 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \newcommand\counsellorname{Konzultant}
 \newcommand\counsellorsname{Konzultanti}
 \newcommand\thanksname{Po\v{d}akovanie}
+\newcommand\introductionname{\'Uvod}
+\newcommand\conclusionname{Z\'aver}
 \if@thesisenglish
 	\renewcommand\universityname{P. J. Safarik University}
 	\renewcommand\facultyname{Faculty of Science}
@@ -1076,7 +1078,10 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 	\renewcommand\tutorname{Tutor}
 	\renewcommand\counsellorname{Counsellor}
 	\renewcommand\thanksname{Thanks}
+  \renewcommand\appendicesname{Appendices}
   \renewcommand\appendixname{Appendix}
+  \renewcommand\introductionname{Introduction}
+  \renewcommand\conclusionname{Conclusion}
 \fi
 %zakazane, uz je definovane v casti prikazov k Abstraktu --RN
 %  \newcommand\abstractname{Abstract}
