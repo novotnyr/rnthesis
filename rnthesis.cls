@@ -254,6 +254,18 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \def\@abstract{\relax}
 \long\def\abstract#1{\long\def\@abstract{#1}}
 
+\let\@klucoveslova=\relax
+\if\@klucoveslova\relax%
+  \ClassWarning{rnthesis}{Klucove slova (\string\klucoveslova) nie su definovane}
+\fi
+\newcommand{\klucoveslova}[1]{\def\@klucoveslova{#1}}
+
+\let\@keywords=\relax
+\if\@keywords\relax%
+  \ClassWarning{rnthesis}{Anglicke klucove slova (\string\keywords) nie su definovane}
+\fi
+\newcommand{\keywords}[1]{\def\@keywords{#1}}
+
 %nadpisy pre Abstract a Abstrakt, straca sa moznost
 %predefinovania v slovak.sty
 \def\@abstractname{Abstract} %redefinovane z LaTeXu
@@ -432,9 +444,12 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
     \setlength{\parsep}{\parskip}%
   }%
   \item[]\@abstrakt
+  \ifx\@klucoveslova\relax\else%
+    \item[]\textbf{K\v{l}\'u\v{c}ov\'e slov\'a:} \emph{\@klucoveslova}%
+  \fi
 \end{list}
-\par
-\vspace{3cm}
+%
+\vspace{3cm} % medzera medzi abstraktami na jednej strane
 \if@longabstracts\newpage\fi
 \par
 \null
@@ -450,7 +465,12 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
     \setlength{\parsep}{\parskip}%
   }%
   \item[]\@abstract
+  \ifx\@keywords\relax\else%
+    \par\bigskip\par%
+    \textbf{Keywords:} \emph{\@keywords}%
+  \fi 
 \end{list}
+%
 \vfill
 % restore page numbering
 \thispagestyle{empty} % ... but leave last page without page number
