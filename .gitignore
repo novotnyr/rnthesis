@@ -7,3 +7,5 @@ test-cases/*.log
 test-cases/*.toc
 test-cases/*.dvi
 test-cases/*.pdf
+**/*.bbl
+**/*.blg
