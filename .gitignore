@@ -9,3 +9,5 @@ test-cases/*.dvi
 test-cases/*.pdf
 **/*.bbl
 **/*.blg
+**/*.lof
+**/*.lot
