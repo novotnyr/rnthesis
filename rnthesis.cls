@@ -169,7 +169,10 @@
         ##1}}}}
 \fi
 %rok
-\def\@rok{\ClassError{rnthesis}{\string\rok{} nebol definovany!}{Definujte v subore prikaz \string\rok !}}
+\def\@rok{%
+  \ClassError{rnthesis}%
+    {Neuvedeny rok! Definujte \string\rok}%
+    {Definujte v subore prikaz \string\rok !}}
 \newcommand{\rok}[1]{\def\@rok{#1}}
 
 %odbor
@@ -200,13 +203,11 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 %iny typ prace ("dizertacny projekt")
 \newcommand{\inytypprace}[1]{\def\@inytypprace{#1}}
 
-%Toto by sme mohli urobit ako \def\@typprace{\ClassError}, ale chybova hlaska by bola velkymi
-%pismenami kvoli \MakeUppercase v maketitle
 \AtBeginDocument{%
   \@ifundefined{@typprace}{%
     \@ifundefined{@inytypprace}{%
       \ClassError{rnthesis}%
-        {Nedefinovany typ prace! Definujte v subore \string\typprace{} alebo \string\inytypprace{}!}%
+        {Neuvedeny typ prace! Definujte \string\typprace{} alebo \string\inytypprace{}!}%
         {Priklad: \string\typprace{bakalarska} alebo \string\inytypprace{projekt}}%
     }%
     {% else (ak je iny typ prace definovany, nerobime nic)
@@ -220,17 +221,24 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %autor. \author je definovany v zakladnom LaTeXu, zodpoveda mu globalne makro \@author, predefinujeme ho z
 %warningu na error
-\def\@author{\@latex@error{Autor \noexpand\author nebol definovany}{Definujte \string\author, priklad: \noexpand\author{Jozef Mak}}} 
+\def\@author{%
+  \ClassError{rnthesis}%
+    {Neuvedeny autor! Definujte prikaz \string\author}%
+    {Definujte \string\author, priklad: \noexpand\author{Jozef Mak}}} 
 
 %miesto vydania
 \def\@miesto{%
-	\@latex@error{Miesto podania prace \noexpand\miesto nebolo definovane}{Definujte \string\miesto, priklad: \noexpand\miesto{Ko\v{s}ice}}% 
+	\ClassError{rnthesis}%
+    {Neuvedene miesto podania prace! Definujte \string\miesto}%
+    {Definujte \string\miesto, priklad: \string\miesto{Ko\v{s}ice}}% 
 }%
 \newcommand{\miesto}[1]{\def\@miesto{#1}}
 
 %veduci
 \def\@veduci{%
-	\ClassError{rnthesis}{Nedefinovany veduci! Definujte v subore \string\veduci{}!}{Priklad: \string\veduci{doc. RNDr. Jozef Mak, DrSc.}}%
+	\ClassError{rnthesis}%
+    {Neuvedeny veduci! Definujte cez \string\veduci}%
+    {Priklad: \string\veduci{doc. RNDr. Jozef Mak, DrSc.}}%
 }
 \newcommand{\veduci}[1]{\def\@veduci{#1}}
 
@@ -244,7 +252,10 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 
 %pracovisko / katedra
-\def\@pracovisko{\ClassError{rnthesis}{Pracovisko (\string\pracovisko) nebolo definovane.}{Definujte v subore \string\pracovisko{}! Priklad: \string\pracovisko{Ustav informatiky}}}
+\def\@pracovisko{%
+  \ClassError{rnthesis}%
+    {Neuvedene pracovisko! Definujte \string\pracovisko}%
+    {Definujte v subore \string\pracovisko{}! Priklad: \string\pracovisko{Ustav informatiky}}}
 \newcommand{\pracovisko}[1]{\def\@pracovisko{#1}}
 
 % abstrakty: definujeme anglicky AbstraCt a slovensky AbstraKt
@@ -384,7 +395,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 \fi %\if@showhonesty
 % dalsia strana ide pre podakovanie
 \if\@podakovanie\relax%
-  \@latex@warning{Je slusne uviest (\noexpand\podakovanie)}%
+  \ClassWarning{rnthesis}{Patri sa uviest \string\podakovanie}
 \else%
   \if@twoside\newpage\thispagestyle{empty}\null\fi % intentionally left blank to maintain odd pages
   \newpage\thispagestyle{empty}
