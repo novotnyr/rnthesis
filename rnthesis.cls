@@ -1077,7 +1077,7 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 	\renewcommand\institutename{Institute}
 	\renewcommand\tutorname{Tutor}
 	\renewcommand\counsellorname{Counsellor}
-	\renewcommand\thanksname{Thanks}
+	\renewcommand\thanksname{Acknowledgments}
   \renewcommand\appendicesname{Appendices}
   \renewcommand\appendixname{Appendix}
   \renewcommand\introductionname{Introduction}
