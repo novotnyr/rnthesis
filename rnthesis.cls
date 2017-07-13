@@ -275,11 +275,11 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 
 %------------- Zadanie
 \def\@pdfzadanie{\relax}
-\newcommand{\pdfzadanie}[1]{%
+\newcommand{\pdfzadanie}[2][pages=-,fitpaper=true]{%
   \def\@pdfzadanie{%
     \setlength{\voffset}{0in}
     \setlength{\hoffset}{0in}
-    \includepdf[pages={1},fitpaper=true]{#1}
+    \includepdf[#1]{#2}
     \@setthesismargins %obnovime okraje
   }%
 }
