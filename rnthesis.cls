@@ -1,7 +1,7 @@
 % Trieda pre diplomove prace. https://github.com/novotnyr/rnthesis
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{rnthesis}
-              [2017/07/09 v1.4
+              [2017/07/13 v1.5
  Robert Novotny 'Thesis' class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
