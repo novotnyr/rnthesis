@@ -234,13 +234,17 @@ z\'{\i}skan\'ych \v{s}t\'udiom a s pomocou uvedenej literat\'ury.
 }%
 \newcommand{\miesto}[1]{\def\@miesto{#1}}
 
-%veduci
+%veduci/skolitel
 \def\@veduci{%
 	\ClassError{rnthesis}%
-    {Neuvedeny veduci! Definujte cez \string\veduci}%
-    {Priklad: \string\veduci{doc. RNDr. Jozef Mak, DrSc.}}%
+    {Neuvedeny veduci, resp. skolitel! Definujte cez \string\veduci alebo \string\skolitel}%
+    {Priklad: \string\veduci{doc. RNDr. Jozef Mak, DrSc.} alebo \string\skolitel{doc. RNDr. Jozef Mak, DrSc.}}%
 }
 \newcommand{\veduci}[1]{\def\@veduci{#1}}
+\newcommand{\skolitel}[1]{%
+    \renewcommand\tutorname{\v{S}kolite\v{l}}
+    \def\@veduci{#1}
+}%
 
 %konzultant
 \let\@konzultant\relax
