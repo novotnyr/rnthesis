@@ -11,3 +11,4 @@ test-cases/*.pdf
 **/*.blg
 **/*.lof
 **/*.lot
+**/*.swp
