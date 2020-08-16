@@ -1,0 +1,59 @@
+\documentclass[thesismargins]{rnthesis}
+\usepackage[slovak]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{rnt-thm}
+
+\usepackage[numbers]{natbib}
+\renewcommand{\bibnumfmt}[1]{\hspace{-6pt}}
+
+\title{O dizertačných prácach}
+\typprace{dizertačná}
+\author{Bc. Milan Makrela}
+\pracovisko{Ústav informatiky}
+\veduci{doc. RNDr. Jozef Mak, DrSc.}
+\miesto{Košice}
+\rok{2019}
+
+\abstract{
+Donec dolor arcu, posuere at, vehicula vitae, accumsan ut,
+lacus. Nulla tristique eros eu diam. Vivamus nec tortor vel
+ligula elementum lacinia. Curabitur euismod eros adipiscing
+ipsum. Donec sed quam at felis suscipit egestas. Morbi faucibus
+libero sit amet libero.
+}
+
+\abstrakt{
+Nulla tristique eros eu diam. Vivamus nec tortor vel
+ligula elementum lacinia. Curabitur euismod eros adipiscing
+ipsum. Donec sed quam at felis suscipit egestas. Morbi faucibus
+libero sit amet libero.
+}
+
+\begin{document}
+\maketitle
+\newpage
+\chapter{Tradičný Lipsum}
+Lorem ipsum dolor sit amet, set \cite{beck07} et \cite{vojcik10}.
+
+\begin{thebibliography}{9}
+% Príklady popisu dokumentov citácií podľa systému meno a dátum (Harvardský systém)
+% ----
+% Varianty zápisov autorov:
+%	[1] GUZANIN, Štefan, Robert SABOVČÍK a Pavol KAČMÁR. Priezviská vždy VEĽKÝMI PÍSMENAMI,
+%		priezvisko prvého autora je vždy pred menom, druhý a ďalší autor majú zápis
+%		Meno PRIEZVISKO
+%	[2] Neuvádzať rodné mená autorov.
+%	[3] Verzálky nie sú povinné, možno použiť aj iné indikatívnejšie označenie
+%
+% ---	
+% 1. Knižná publikácia (monografia, učebnica, zborník ...)
+%   1 autor
+\bibitem{beck07}
+	\osoba{Beck, G.}, 2007. \emph{Zakázaná rétorika: 30 manipulatívních technik}. Preklad
+\osoba{Pomikálová, M.}. Praha: Grada Publishing. ISBN 978-80-247-1743-2.
+\bibitem{vojcik10}
+	\osoba{Vojčík, P.}, 2010. \emph{Občianske právo hmotné II.} 3. prep. a dopl. vyd. Košice: UPJŠ v Košiciach. ISBN 978-80-7097-817-7.
+\end{thebibliography}
+\end{document}
